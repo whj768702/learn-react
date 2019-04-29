@@ -100,10 +100,12 @@ class Game extends React.Component {
     });
 
     let status;
-    if (winner) {
+    if (winner && this.state.stepNumber <= 9) {
       status = `Winner: ${winner}`;
-    } else {
+    } else if (this.state.stepNumber < 9) {
       status = `next player: ${this.state.xIsNext ? 'X' : 'O'}`;
+    } else if (this.state.stepNumber === 9) {
+      status = 'no one win';
     }
     return (
       <div className="game">
