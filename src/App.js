@@ -6,6 +6,7 @@ import { Clock, MyClock } from './clock/clock';
 import { NumberListClass, NumberListFunction} from './key/key';
 import Toggle from './event/event';
 import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
+import Calculator from './liftingStateUp/Calculator';
 
 function App () {
     const numbers = [1, 2, 3, 4, 5];
@@ -25,6 +26,7 @@ function App () {
             <div><NameForm/></div>
             <div><NameFormFunction/></div>
             <div><FlavorFormFunction/></div>
+            <div><Calculator/></div>
         </div>
     );
 }
