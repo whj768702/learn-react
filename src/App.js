@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Game from './game/game';
+import MyApp from './welcome/welcome';
+import { Clock, MyClock } from './clock/clock';
+import { NumberListClass, NumberListFunction} from './key/key';
+import Toggle from './event/event';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App () {
+    const numbers = [1, 2, 3, 4, 5];
+    const names = ['ni', 'hao', 'ma'];
+
+    return (
+        <div className="App">
+            <div>
+                <Game/>
+            </div>
+            <div><MyApp names={names}/></div>
+            <div><Clock/></div>
+            <div><MyClock/></div>
+            <div><Toggle/></div>
+            <div><NumberListClass numbers={numbers}/></div>
+            <div><NumberListFunction numbers={numbers}/></div>
+        </div>
+    );
 }
 
 export default App;
