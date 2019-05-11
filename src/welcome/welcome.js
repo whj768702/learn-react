@@ -5,15 +5,15 @@ function Welcome (props) {
 }
 
 function MyApp (props) {
-    function renderWelcome (name) {
+    function renderWelcome (name, index) {
         return (
-            <Welcome name={name}/>
+            <Welcome key={name} name={name}/>
         );
     }
 
     let target = [];
     for (let i = 0; i < props.names.length; i++) {
-        target.push(renderWelcome(props.names[i]));
+        target.push(renderWelcome(props.names[i]), i);
     }
 
     return (

@@ -5,6 +5,7 @@ import MyApp from './welcome/welcome';
 import { Clock, MyClock } from './clock/clock';
 import { NumberListClass, NumberListFunction} from './key/key';
 import Toggle from './event/event';
+import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
 
 function App () {
     const numbers = [1, 2, 3, 4, 5];
@@ -21,6 +22,9 @@ function App () {
             <div><Toggle/></div>
             <div><NumberListClass numbers={numbers}/></div>
             <div><NumberListFunction numbers={numbers}/></div>
+            <div><NameForm/></div>
+            <div><NameFormFunction/></div>
+            <div><FlavorFormFunction/></div>
         </div>
     );
 }
