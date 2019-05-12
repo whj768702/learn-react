@@ -7,6 +7,7 @@ import { NumberListClass, NumberListFunction} from './key/key';
 import Toggle from './event/event';
 import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
 import Calculator from './liftingStateUp/Calculator';
+import ContextDemo from './context/contextDemo';
 // import Example from './composition/composition'
 const Example = React.lazy(() => import('./composition/composition'));
 
@@ -35,6 +36,9 @@ function App () {
                 }>
                     <Example/>
                 </Suspense>
+            </div>
+            <div>
+                <ContextDemo />
             </div>
         </div>
     );
