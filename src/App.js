@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Game from './game/game';
 import MyApp from './welcome/welcome';
@@ -7,7 +7,8 @@ import { NumberListClass, NumberListFunction} from './key/key';
 import Toggle from './event/event';
 import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
 import Calculator from './liftingStateUp/Calculator';
-import Example from './composition/composition'
+// import Example from './composition/composition'
+const Example = React.lazy(() => import('./composition/composition'));
 
 function App () {
     const numbers = [1, 2, 3, 4, 5];
@@ -28,7 +29,13 @@ function App () {
             <div><NameFormFunction/></div>
             <div><FlavorFormFunction/></div>
             <div><Calculator/></div>
-            <div><Example/></div>
+            <div >
+                <Suspense fallback={
+                    <div>loading...</div>
+                }>
+                    <Example/>
+                </Suspense>
+            </div>
         </div>
     );
 }
