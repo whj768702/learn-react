@@ -8,6 +8,7 @@ import Toggle from './event/event';
 import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
 import Calculator from './liftingStateUp/Calculator';
 import ContextDemo from './context/contextDemo';
+import RefComponent from './ref/ref';
 // import Example from './composition/composition'
 const Example = React.lazy(() => import('./composition/composition'));
 
@@ -39,6 +40,9 @@ function App () {
             </div>
             <div>
                 <ContextDemo />
+            </div>
+            <div>
+                <RefComponent />
             </div>
         </div>
     );
