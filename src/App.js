@@ -9,7 +9,10 @@ import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
 import Calculator from './liftingStateUp/Calculator';
 import ContextDemo from './context/contextDemo';
 import RefComponent from './ref/ref';
+import ReversedName from './higherOrderComponent/higherOderComponent';
+
 // import Example from './composition/composition'
+
 const Example = React.lazy(() => import('./composition/composition'));
 
 function App () {
@@ -43,6 +46,9 @@ function App () {
             </div>
             <div>
                 <RefComponent />
+            </div>
+            <div>
+                <ReversedName children={'123456'}/>
             </div>
         </div>
     );
