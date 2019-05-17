@@ -10,6 +10,7 @@ import Calculator from './liftingStateUp/Calculator';
 import ContextDemo from './context/contextDemo';
 import RefComponent from './ref/ref';
 import ReversedName from './higherOrderComponent/higherOderComponent';
+import MouseTracker from './renderProps/renderProps';
 
 // import Example from './composition/composition'
 
@@ -49,6 +50,9 @@ function App () {
             </div>
             <div>
                 <ReversedName children={'123456'}/>
+            </div>
+            <div>
+                <MouseTracker/>
             </div>
         </div>
     );
