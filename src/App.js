@@ -1,4 +1,10 @@
 import React, { Suspense } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect
+} from 'react-router-dom';
 import './App.css';
 import Game from './game/game';
 import MyApp from './welcome/welcome';
@@ -21,41 +27,68 @@ function App () {
     const names = ['ni', 'hao', 'ma'];
 
     return (
-        <div className="App">
-            <div>
-                <Game/>
+        <Router>
+            <div className="App">
+                <ul>
+                    <li>
+                        <Link to="/Game">Game</Link>
+                    </li>
+                    <li>
+                        <Link to="/MyApp">MyApp</Link>
+                    </li>
+                    <li>
+                        <Link to="/clock">clock</Link>
+                    </li>
+                    <li>
+                        <Link to="/MyClock">MyClock</Link>
+                    </li>
+                    <li>
+                        <Link to="/Toggle">Toggle</Link>
+                    </li>
+                </ul>
+                <Route path="/Game" component={Game} />
+                <Route path="/MyApp" render={() => <MyApp names={names} />} />
+                <Route path="/Clock" component={Clock} />
+                <Route path="/MyClock" component={MyClock} />
             </div>
-            <div><MyApp names={names}/></div>
-            <div><Clock/></div>
-            <div><MyClock/></div>
-            <div><Toggle/></div>
-            <div><NumberListClass numbers={numbers}/></div>
-            <div><NumberListFunction numbers={numbers}/></div>
-            <div><NameForm/></div>
-            <div><NameFormFunction/></div>
-            <div><FlavorFormFunction/></div>
-            <div><Calculator/></div>
-            <div >
-                <Suspense fallback={
-                    <div>loading...</div>
-                }>
-                    <Example/>
-                </Suspense>
-            </div>
-            <div>
-                <ContextDemo />
-            </div>
-            <div>
-                <RefComponent />
-            </div>
-            <div>
-                <ReversedName children={'123456'}/>
-            </div>
-            <div>
-                <MouseTracker/>
-            </div>
-        </div>
+        </Router>
     );
+    // return (
+    //     <div className="App">
+    //         <div>
+    //             <Game/>
+    //         </div>
+    //         <div><MyApp names={names}/></div>
+    //         <div><Clock/></div>
+    //         <div><MyClock/></div>
+    //         <div><Toggle/></div>
+    //         <div><NumberListClass numbers={numbers}/></div>
+    //         <div><NumberListFunction numbers={numbers}/></div>
+    //         <div><NameForm/></div>
+    //         <div><NameFormFunction/></div>
+    //         <div><FlavorFormFunction/></div>
+    //         <div><Calculator/></div>
+    //         <div >
+    //             <Suspense fallback={
+    //                 <div>loading...</div>
+    //             }>
+    //                 <Example/>
+    //             </Suspense>
+    //         </div>
+    //         <div>
+    //             <ContextDemo />
+    //         </div>
+    //         <div>
+    //             <RefComponent />
+    //         </div>
+    //         <div>
+    //             <ReversedName children={'123456'}/>
+    //         </div>
+    //         <div>
+    //             <MouseTracker/>
+    //         </div>
+    //     </div>
+    // );
 }
 
 export default App;
