@@ -9,7 +9,7 @@ import './App.css';
 import Game from './game/game';
 import MyApp from './welcome/welcome';
 import { Clock, MyClock } from './clock/clock';
-import { NumberListClass, NumberListFunction} from './key/key';
+import { NumberListClass, NumberListFunction } from './key/key';
 import Toggle from './event/event';
 import { FlavorFormFunction, NameForm, NameFormFunction } from './form/form';
 import Calculator from './liftingStateUp/Calculator';
@@ -45,11 +45,15 @@ function App () {
                     <li>
                         <Link to="/Toggle">Toggle</Link>
                     </li>
+                    <li>
+                        <Link to="/Context">ContextDemo</Link>
+                    </li>
                 </ul>
-                <Route path="/Game" component={Game} />
-                <Route path="/MyApp" render={() => <MyApp names={names} />} />
-                <Route path="/Clock" component={Clock} />
-                <Route path="/MyClock" component={MyClock} />
+                <Route path="/Game" component={Game}/>
+                <Route path="/MyApp" render={() => <MyApp names={names}/>}/>
+                <Route path="/Clock" component={Clock}/>
+                <Route path="/MyClock" component={MyClock}/>
+                <Route path="/Context" component={ContextDemo}/>
             </div>
         </Router>
     );
