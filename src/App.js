@@ -11,6 +11,7 @@ import { Clock, MyClock } from './clock/clock';
 import ContextDemo from './context/contextDemo';
 import ReducerDemo from './hooks/userReducer/useReducer';
 import useMemoDemo from './hooks/useMemo/useMemo';
+import useRefDemo from './hooks/useRef/useRef';
 
 // const Example = React.lazy(() => import('./composition/composition'));
 
@@ -46,6 +47,9 @@ function App () {
                     <li>
                         <Link to="/useMemo">useMemo</Link>
                     </li>
+                    <li>
+                        <Link to="/useRef">useRef</Link>
+                    </li>
                 </ul>
                 <Route path="/Game" component={Game}/>
                 <Route path="/MyApp" render={() => <MyApp names={names}/>}/>
@@ -54,6 +58,7 @@ function App () {
                 <Route path="/Context" component={ContextDemo}/>
                 <Route path="/useReducer" component={ReducerDemo}/>
                 <Route path="/useMemo" component={useMemoDemo}/>
+                <Route path="/useRef" component={useRefDemo}/>
             </div>
         </Router>
     );
