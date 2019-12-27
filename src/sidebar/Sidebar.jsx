@@ -1,5 +1,7 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import Game from '../game/game';
 
 const { SubMenu } = Menu;
 
@@ -25,7 +27,9 @@ function Sidebar () {
         }
       >
         <Menu className="ItemGroup" key='g1' title='item 1'>
-          <Menu.Item key='1'>option 1</Menu.Item>
+          <Menu.Item key='Game'>
+            <Link to="/Game">Game</Link>
+          </Menu.Item>
         </Menu>
       </SubMenu>
     </Menu>
