@@ -10,6 +10,7 @@ import {Clock, MyClock} from "./clock/clock";
 import ContextDemo from './context/contextDemo';
 import useRefDemo from "./hooks/useRef/useRef";
 import ReducerDemo from "./hooks/userReducer/useReducer";
+import useEffectDemo from './hooks/useEffect/useEffectDemo';
 
 const {Header, Sider, Content} = Layout;
 const {Item, SubMenu} = Menu;
@@ -59,6 +60,10 @@ function Homepage() {
                 <span>useReducer</span>
                 <Link to='/hooks/useReducer'/>
               </Item>
+              <Item key='useEffect'>
+                <span>useEffect</span>
+                <Link to='/hooks/useEffect'/>
+              </Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -89,6 +94,7 @@ function Homepage() {
             <Route path='/hooks/useMemo' component={useMemoDemo}/>
             <Route path='/hooks/useRef' component={useRefDemo}/>
             <Route path='/hooks/useReducer' component={ReducerDemo}/>
+            <Route path='/hooks/useEffect' component={useEffectDemo}/>
           </Content>
         </Layout>
       </Layout>
