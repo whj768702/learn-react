@@ -11,6 +11,7 @@ import ContextDemo from './context/contextDemo';
 import useRefDemo from "./hooks/useRef/useRef";
 import ReducerDemo from "./hooks/userReducer/useReducer";
 import useEffectDemo from './hooks/useEffect/useEffectDemo';
+import UseContextDemo from './hooks/useContext/useContextDemo';
 
 const {Header, Sider, Content} = Layout;
 const {Item, SubMenu} = Menu;
@@ -64,6 +65,10 @@ function Homepage() {
                 <span>useEffect</span>
                 <Link to='/hooks/useEffect'/>
               </Item>
+              <Item key='useContext'>
+                <span>useContext</span>
+                <Link to='/hooks/useContext'/>
+              </Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -95,6 +100,7 @@ function Homepage() {
             <Route path='/hooks/useRef' component={useRefDemo}/>
             <Route path='/hooks/useReducer' component={ReducerDemo}/>
             <Route path='/hooks/useEffect' component={useEffectDemo}/>
+            <Route path='/hooks/useContext' component={UseContextDemo}/>
           </Content>
         </Layout>
       </Layout>
