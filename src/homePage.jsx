@@ -12,6 +12,7 @@ import useRefDemo from "./hooks/useRef/useRef";
 import ReducerDemo from "./hooks/userReducer/useReducer";
 import useEffectDemo from './hooks/useEffect/useEffectDemo';
 import UseContextDemo from './hooks/useContext/useContextDemo';
+import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 
 const {Header, Sider, Content} = Layout;
 const {Item, SubMenu} = Menu;
@@ -57,9 +58,9 @@ function Homepage() {
                 <span>useRef</span>
                 <Link to='/hooks/useRef'/>
               </Item>
-              <Item key='useReducer'>
-                <span>useReducer</span>
-                <Link to='/hooks/useReducer'/>
+              <Item key='useReducer1'>
+                <span>useReducer1</span>
+                <Link to='/hooks/useReducer1'/>
               </Item>
               <Item key='useEffect'>
                 <span>useEffect</span>
@@ -68,6 +69,10 @@ function Homepage() {
               <Item key='useContext'>
                 <span>useContext</span>
                 <Link to='/hooks/useContext'/>
+              </Item>
+              <Item key='useReducer2'>
+                <span>useReducer2</span>
+                <Link to='/hooks/useReducer2'/>
               </Item>
             </SubMenu>
           </Menu>
@@ -98,9 +103,10 @@ function Homepage() {
             <Route path='/hooks/useState' component={useStateDemo}/>
             <Route path='/hooks/useMemo' component={useMemoDemo}/>
             <Route path='/hooks/useRef' component={useRefDemo}/>
-            <Route path='/hooks/useReducer' component={ReducerDemo}/>
+            <Route path='/hooks/useReducer1' component={ReducerDemo}/>
             <Route path='/hooks/useEffect' component={useEffectDemo}/>
             <Route path='/hooks/useContext' component={UseContextDemo}/>
+            <Route path='/hooks/useReducer2' component={UseReducerDemo}/>
           </Content>
         </Layout>
       </Layout>

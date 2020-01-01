@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState} from 'react';
 import ShowContent from '../../ShowContent/ShowContent';
 
-const CountContext = createContext();
+const CountContext = createContext(0);
 
 function ShowCount() {
   let count = useContext(CountContext);
