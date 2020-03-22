@@ -12,7 +12,7 @@ function useWinSize() {
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
     })
-  });
+  }, []);
 
   useEffect(() => {
     window.addEventListener('resize', onResize);
@@ -20,7 +20,7 @@ function useWinSize() {
     return () => {
       window.removeEventListener('resize', onResize);
     }
-  }, []);
+  }, [onResize]);
 
   return size;
 }
