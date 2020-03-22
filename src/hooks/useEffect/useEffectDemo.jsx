@@ -26,7 +26,10 @@ const UseEffectDemo = () => {
 
   /*
   effect中返回的一个方法起到解绑回收等操作。
-  deps中是依赖，有对应依赖才会触发effect执行；[]不会触发；(()=>{})，不写会触发。
+  deps中是依赖，有对应依赖才会触发effect执行; 
+  useEffect(() =>{}): 无论哪个变化都会触发;
+  []: 只触发一次；
+  [xxx]: xxx变化就会触发;
    */
   useEffect(() => {
     console.log(`useEffect => you clicked ${count} times`);
