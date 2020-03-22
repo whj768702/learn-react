@@ -1,5 +1,8 @@
 import React, {useState, useMemo} from 'react';
 
+/**
+ * 组件内有些方法，只想在其参数更改时运行它们，而不是每次组件更新都运行。
+ */
 function useMemoDemo() {
   const [lisi, setLisi] = useState('李四等待中');
   const [wangwu, setWangwu] = useState('王五等待中');
@@ -20,7 +23,7 @@ function useMemoDemo() {
 }
 
 function ChildComponent({name, children}) {
-  function changeLisi() {
+  function changeLisi(name) {
     console.log('李四来了');
     return name + '李四来了！！！';
   }
@@ -31,7 +34,8 @@ function ChildComponent({name, children}) {
   return (
     <>
       <div>{actionLisi}</div>
-      {/*<div>{changeLisi()}</div> 王五更新，李四每次也会打印，性能影响*/}
+      { /* 王五更新，李四每次也会打印，性能影响 */ }
+      <div>{changeLisi()}</div> 
       <div>{children}</div>
     </>
   );
