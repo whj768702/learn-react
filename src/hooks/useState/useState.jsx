@@ -8,11 +8,30 @@ import React, { useState } from 'react';
  * you can pass a function to setState. The function will
  * receive the previous value, and return an updated value.
  */
+ /**
+  *  lazy initial state.
+  * If the initial state is the result of an expensive computation,
+  * you may provide a function instead, which will be executed only on the initial render.
+  * for example:
+  * const [state, setState] = useState(() => {
+  *   const initialState = someExpensiveComputation(props);
+  *   return initialState;
+  * });
+  */
 const UseStateDemo = ({title}) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(() => 0);
 
   // 2
   const [count2, setCount2] = useState({count:1,type: '-'});
+
+  const changeCount2 = (prevValue) => {
+    console.log('preive value: ', prevValue);
+    const temp = {
+      count: prevValue.count + 1,
+      type: prevValue.type
+    };
+    setCount2(temp);
+  };
 
   return (
     <div>
@@ -26,12 +45,7 @@ const UseStateDemo = ({title}) => {
           return {count: prevCount.count-1};
          })}>-</button>
         <button onClick={() => setCount2(prevCount =>prevCount.count+1)}>+</button>
-        <button onClick={() => setCount2(() => {
-          console.log(count2);
-          --count2.count;
-          console.log(count2);
-          return count2;
-        })}>-(并无变化)</button>
+        <button onClick={() => changeCount2(count2)}>+1</button>
       </div>
     </div>
   );
