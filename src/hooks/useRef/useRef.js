@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 /**
  * 作用：获取DOM元素的节点
         获取子组件的实例
@@ -15,24 +15,34 @@ function useRefDemo() {
 
   const inputRef = useRef();
   const onFocusClick = () => {
+    console.log('inputRef: ', inputRef);
     if (inputRef && inputRef.current) {
       inputRef.current.focus();
     }
-  }
+  };
+
+  const wrapRef = useRef();
+  const getWrapRef = () => {
+    console.log('wrapRef: ', wrapRef.current);
+  };
   return (
-    <>
-      <input type="text" value={text} onChange={(e) => {
-        setText(e.target.value);
-      }}/>
-      <br/>
+    <div ref={wrapRef} onClick={getWrapRef}>
+      <input
+        type="text"
+        value={text}
+        onChange={e => {
+          setText(e.target.value);
+        }}
+      />
+      <br />
       <span>Ref保留组件上一次的状态:</span>
       <span>{textRef.current}</span>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <span>操作DOM节点</span>
-      <input type="text" ref={inputRef}/>
+      <input type="text" ref={inputRef} />
       <button onClick={onFocusClick}>点了聚焦input</button>
-    </>
+    </div>
   );
 }
 
