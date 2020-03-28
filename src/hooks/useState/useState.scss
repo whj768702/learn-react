@@ -1,0 +1,12 @@
+.demo {
+  margin-bottom: 10px;
+  &:last-child {
+    margin-top: 20px;
+  }
+  .button-group {
+    display: flex;
+    button {
+      margin-right: 8px;
+    }
+  }
+}

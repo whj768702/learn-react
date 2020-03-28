@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Button } from 'antd';
+
+import './useState.scss';
 
 /**
  * 让函数式组件拥有状态管理特性，类似class组件中的this.state和this.setState
@@ -8,47 +11,77 @@ import React, { useState } from 'react';
  * you can pass a function to setState. The function will
  * receive the previous value, and return an updated value.
  */
- /**
-  *  lazy initial state.
-  * If the initial state is the result of an expensive computation,
-  * you may provide a function instead, which will be executed only on the initial render.
-  * for example:
-  * const [state, setState] = useState(() => {
-  *   const initialState = someExpensiveComputation(props);
-  *   return initialState;
-  * });
-  */
-const UseStateDemo = ({title}) => {
+/**
+ *  lazy initial state.
+ * If the initial state is the result of an expensive computation,
+ * you may provide a function instead, which will be executed only on the initial render.
+ * for example:
+ * const [state, setState] = useState(() => {
+ *   const initialState = someExpensiveComputation(props);
+ *   return initialState;
+ * });
+ */
+const UseStateDemo = ({ title }) => {
   const [count, setCount] = useState(() => 0);
 
   // 2
-  const [count2, setCount2] = useState({count:1,type: '-'});
+  const [{ count1, count2 }, setCount2] = useState({ count1: 10, count2: 20 });
 
-  const changeCount2 = (prevValue) => {
-    console.log('preive value: ', prevValue);
-    const temp = {
-      count: prevValue.count + 1,
-      type: prevValue.type
+  const changeCount1 = prevCount => {
+    const newValue = {
+      ...prevCount,
+      count1: prevCount.count1 + 10,
     };
-    setCount2(temp);
+    return newValue;
+  };
+  const changeCount2 = prevCount => {
+    const newValue = {
+      ...prevCount,
+      count2: prevCount.count2 + 10,
+    };
+    return newValue;
   };
 
   return (
     <div>
-      <div>
-      <p>clicked {count} times.</p>
-      <button onClick={()=>{setCount(count+1)}}>click</button>
+      <div className="demo">
+        <p>最简单的示例：</p>
+        <span>clicked {count} times.</span>
+        <div>
+          <Button
+            size="default"
+            onClick={() => {
+              setCount(count + 1);
+            }}
+          >
+            click
+          </Button>
+        </div>
       </div>
-      <div>
-        <p>Count2: {count2.count}</p>
-        <button onClick={() => setCount2(prevCount=>{
-          return {count: prevCount.count-1};
-         })}>-</button>
-        <button onClick={() => setCount2(prevCount =>prevCount.count+1)}>+</button>
-        <button onClick={() => changeCount2(count2)}>+1</button>
+      <div></div>
+      <div className="demo">
+        <span>对象更新示例：</span>
+        <p>Count1: {count1}</p>
+        <p>Count2: {count2}</p>
+        <div className="button-group">
+          <Button
+            onClick={() =>
+              setCount2(prevCount => {
+                return { count1: prevCount.count1 + 10 };
+              })
+            }
+          >
+            count1+10(会丢失count2)
+          </Button>
+          <Button onClick={() => setCount2(prevCount => ({ count2: prevCount.count2 + 10 }))}>
+            count2+10(会丢失count1)
+          </Button>
+          <Button onClick={() => setCount2(changeCount1)}>count1+10(保留count2)</Button>
+          <Button onClick={() => setCount2(changeCount2)}>count2+10(保留count1)</Button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default UseStateDemo;
