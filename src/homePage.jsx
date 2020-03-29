@@ -15,6 +15,7 @@ import UseContextDemo from './hooks/useContext/useContextDemo';
 import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 import CustomHooks from './hooks/customHooks/customHooks';
 import UseCallbackDemo from './hooks/useCallback/useCallback';
+import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
 
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
@@ -84,6 +85,10 @@ function Homepage() {
                 <span>useCallback</span>
                 <Link to="/hooks/useCallback"></Link>
               </Item>
+              <Item key="useLayoutEffect">
+                <span>useLayoutEffect</span>
+                <Link to="/hooks/useLayoutEffect"></Link>
+              </Item>
             </SubMenu>
           </Menu>
         </Sider>
@@ -119,6 +124,7 @@ function Homepage() {
             <Route path="/hooks/useReducer2" component={UseReducerDemo} />
             <Route path="/hooks/customHooks" component={CustomHooks} />
             <Route path="/hooks/useCallback" component={UseCallbackDemo} />
+            <Route path="/hooks/useLayoutEffect" component={UseLayoutEffectDemo} />
           </Content>
         </Layout>
       </Layout>
