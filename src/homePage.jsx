@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
-import Icon from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import Game from './game/game';
 import MyApp from './welcome/welcome';
@@ -95,13 +95,26 @@ function Homepage() {
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
+            {collapsed ? (
+              <MenuFoldOutlined
+                onClick={() => {
+                  toggle(false);
+                }}
+              />
+            ) : (
+              <MenuUnfoldOutlined
+                onClick={() => {
+                  toggle(true);
+                }}
+              />
+            )}
+            {/* <Icon
               className="trigger"
               type={collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={() => {
                 toggle((collapsed = !collapsed));
               }}
-            />
+            /> */}
           </Header>
           <Content
             style={{
