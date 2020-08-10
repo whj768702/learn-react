@@ -27,14 +27,14 @@ const UseStateDemo = ({ title }) => {
   // 2
   const [{ count1, count2 }, setCount2] = useState({ count1: 10, count2: 20 });
 
-  const changeCount1 = prevCount => {
+  const changeCount1 = (prevCount) => {
     const newValue = {
       ...prevCount,
       count1: prevCount.count1 + 10,
     };
     return newValue;
   };
-  const changeCount2 = prevCount => {
+  const changeCount2 = (prevCount) => {
     const newValue = {
       ...prevCount,
       count2: prevCount.count2 + 10,
@@ -49,7 +49,8 @@ const UseStateDemo = ({ title }) => {
         <span>clicked {count} times.</span>
         <div>
           <Button
-            size="default"
+            size="small"
+            type="primary"
             onClick={() => {
               setCount(count + 1);
             }}
@@ -63,21 +64,32 @@ const UseStateDemo = ({ title }) => {
         <span>对象更新示例：</span>
         <p>Count1: {count1}</p>
         <p>Count2: {count2}</p>
+        <Button size="small" type="primary" onClick={() => setCount2({ count1: 10, count2: 20 })}>
+          重置
+        </Button>
         <div className="button-group">
           <Button
+            size="small"
             onClick={() =>
-              setCount2(prevCount => {
+              setCount2((prevCount) => {
                 return { count1: prevCount.count1 + 10 };
               })
             }
           >
             count1+10(会丢失count2)
           </Button>
-          <Button onClick={() => setCount2(prevCount => ({ count2: prevCount.count2 + 10 }))}>
+          <Button
+            size="small"
+            onClick={() => setCount2((prevCount) => ({ count2: prevCount.count2 + 10 }))}
+          >
             count2+10(会丢失count1)
           </Button>
-          <Button onClick={() => setCount2(changeCount1)}>count1+10(保留count2)</Button>
-          <Button onClick={() => setCount2(changeCount2)}>count2+10(保留count1)</Button>
+          <Button size="small" onClick={() => setCount2(changeCount1)}>
+            count1+10(保留count2)
+          </Button>
+          <Button size="small" onClick={() => setCount2(changeCount2)}>
+            count2+10(保留count1)
+          </Button>
         </div>
       </div>
     </div>
