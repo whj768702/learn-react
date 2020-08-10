@@ -4,26 +4,22 @@ import ThemedButton from './themedButton';
 import ThemeTogglerButton from './themeTogglerButton';
 
 function Toolbar(props) {
-  return (
-    <ThemedButton onClick={props.changeTheme}>
-      change theme
-    </ThemedButton>
-  );
+  return <ThemedButton onClick={props.changeTheme}>change theme</ThemedButton>;
 }
 
-class ContextDemo extends React.Component{
+class ContextDemo extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggleTheme = () => {
-      this.setState(state => ({
-        theme: state.theme === themes.dark ? themes.light : themes.dark
+      this.setState((state) => ({
+        theme: state.theme === themes.dark ? themes.light : themes.dark,
       }));
     };
 
     this.state = {
       theme: themes.light,
-      toggleTheme: this.toggleTheme
+      toggleTheme: this.toggleTheme,
     };
   }
 
