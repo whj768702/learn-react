@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react';
+import React, { createContext, useReducer } from 'react';
 
 /*
 状态共享的文件
@@ -17,17 +17,14 @@ const reducer = (state, action) => {
     default: {
       return state;
     }
-
   }
 };
 
-export const Color = props => {
+export const Color = (props) => {
   const [color, dispatch] = useReducer(reducer, 'blue');
 
   // 共享的状态中传递dispatch和color值
   return (
-    <ColorContext.Provider value={{color, dispatch}}>
-      {props.children}
-    </ColorContext.Provider>
+    <ColorContext.Provider value={{ color, dispatch }}>{props.children}</ColorContext.Provider>
   );
 };
