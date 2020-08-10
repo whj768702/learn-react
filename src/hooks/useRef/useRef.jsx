@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Input, Button } from 'antd';
 /**
  * 作用：获取DOM元素的节点
         获取子组件的实例
@@ -27,10 +28,10 @@ function useRefDemo() {
   };
   return (
     <div ref={wrapRef} onClick={getWrapRef}>
-      <input
+      <Input
         type="text"
         value={text}
-        onChange={e => {
+        onChange={(e) => {
           setText(e.target.value);
         }}
       />
@@ -40,8 +41,8 @@ function useRefDemo() {
       <br />
       <br />
       <span>操作DOM节点</span>
-      <input type="text" ref={inputRef} />
-      <button onClick={onFocusClick}>点了聚焦input</button>
+      <Input type="text" ref={inputRef} />
+      <Button onClick={onFocusClick}>点了聚焦input</Button>
     </div>
   );
 }
