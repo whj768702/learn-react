@@ -7,13 +7,13 @@ function Welcome (props) {
 function MyApp (props) {
     function renderWelcome (name, index) {
         return (
-            <Welcome key={name} name={name}/>
+            <Welcome key={index} name={name}/>
         );
     }
 
     let target = [];
     for (let i = 0; i < props.names.length; i++) {
-        target.push(renderWelcome(props.names[i]), i);
+        target.push(renderWelcome(props.names[i], i));
     }
 
     return (
