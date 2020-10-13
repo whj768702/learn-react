@@ -20,7 +20,7 @@ function useMemoDemo() {
 }
 
 function ChildComponent({name, children}) {
-  function changeLisi() {
+  function changeLisi(name) {
     console.log('李四来了');
     return name + '李四来了！！！';
   }
