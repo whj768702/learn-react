@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Layout, Menu, Icon} from "antd";
+import {Layout, Menu} from "antd";
+import Icon from "@ant-design/icons";
 import {BrowserRouter, Link, Route} from "react-router-dom";
 import Game from "./game/game";
 import MyApp from "./welcome/welcome";
