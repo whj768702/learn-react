@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useState} from 'react';
 // import ShowContent from '../../ShowContent/ShowContent';
+import {Button} from "antd";
 
 const CountContext = createContext(0);
 
@@ -15,10 +16,10 @@ const UseContextDemo = () => {
   return (
     <div>
       <p>clicked {count} times</p>
-      <button onClick={() => {
+      <Button onClick={() => {
         setCount(count + 1);
       }}>click
-      </button>
+      </Button>
       <CountContext.Provider value={count}>
         <ShowCount/>
       </CountContext.Provider>

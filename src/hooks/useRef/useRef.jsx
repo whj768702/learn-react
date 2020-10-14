@@ -1,5 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 
+import {Button, Input} from "antd";
+
 function useRefDemo() {
   const inputEl = useRef(null);
   const onButtonClick = () => {
@@ -16,11 +18,11 @@ function useRefDemo() {
   });
   return (
     <>
-      <input type="text" ref={inputEl}/>
-      <button onClick={onButtonClick}>在input上展示文字</button>
+      <Input type="text" ref={inputEl}/>
+      <Button onClick={onButtonClick}>在input上展示文字</Button>
       <br/>
       <br/>
-      <input type="text" value={text} onChange={(e) => {
+      <Input type="text" value={text} onChange={(e) => {
         setText(e.target.value);
       }}/>
     </>

@@ -1,5 +1,7 @@
 import React, {useReducer} from 'react';
 
+import {Button} from "antd";
+
 const UseReducerDemo = () => {
   const [count, dispatch] = useReducer((state, action)=> {
     switch (action.type) {
@@ -17,8 +19,8 @@ const UseReducerDemo = () => {
   return (
     <div>
       <h2>current value: {count}</h2>
-      <button onClick={() => {dispatch({type: 'add'})}}>add</button>
-      <button onClick={() => {dispatch({type: 'sub'})}}>sub</button>
+      <Button onClick={() => {dispatch({type: 'add'})}}>add</Button>
+      <Button onClick={() => {dispatch({type: 'sub'})}}>sub</Button>
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 
+import {Button} from "antd";
+
 function Index() {
   useEffect(() => {
     console.log('index come');
@@ -38,10 +40,10 @@ const UseEffectDemo = () => {
   return (
     <div>
       <p>you clicked {count} times</p>
-      <button onClick={() => {
+      <Button onClick={() => {
         setCount(count + 1);
       }}>click
-      </button>
+      </Button>
       <BrowserRouter>
         <ul>
           <li>
