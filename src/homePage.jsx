@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Layout, Menu } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
-import Game from './game/game';
-import MyApp from './welcome/welcome';
-import useStateDemo from './hooks/useState/useState';
-import useMemoDemo from './hooks/useMemo/useMemo';
+import React, {useState} from 'react';
+import {BrowserRouter, Link, Route} from "react-router-dom";
+
+import {Layout, Menu} from "antd";
+import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
+
 import './index.css';
-import { Clock, MyClock } from './clock/clock';
+
+import Game from "./game/game";
+import MyApp from "./welcome/welcome";
+import useStateDemo from "./hooks/useState/useState";
+import useMemoDemo from "./hooks/useMemo/useMemo";
+import {Clock, MyClock} from "./clock/clock";
 import ContextDemo from './context/contextDemo';
-import useRefDemo from './hooks/useRef/useRef.jsx';
-import ReducerDemo from './hooks/userReducer/useReducer';
+import useRefDemo from "./hooks/useRef/useRef";
+import ReducerDemo from "./hooks/userReducer/useReducer";
 import useEffectDemo from './hooks/useEffect/useEffectDemo';
 import UseContextDemo from './hooks/useContext/useContextDemo';
 import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 import CustomHooks from './hooks/customHooks/customHooks';
-import UseCallbackDemo from './hooks/useCallback/useCallback';
-import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
 
-const { Header, Sider, Content } = Layout;
-const { Item, SubMenu } = Menu;
+const {Header, Sider, Content} = Layout;
+const {Item, SubMenu} = Menu;
 
 function SideMenu() {
   const [collapsed, toggle] = useState(false);

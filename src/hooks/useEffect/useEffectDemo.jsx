@@ -33,7 +33,7 @@ const UseEffectDemo = () => {
 
   /*
   effect中返回的一个方法起到解绑回收等操作。
-  deps中是依赖，有对应依赖才会触发effect执行; 
+  deps中是依赖，有对应依赖才会触发effect执行;
   useEffect(() =>{}): 无论哪个跟踪的值变化都会触发;
   []: 只触发一次；
   [xxx]: xxx变化就会触发;
