@@ -1,26 +1,28 @@
-import React, {useState} from 'react';
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
 
-import {Layout, Menu} from "antd";
-import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
+import { Layout, Menu } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import './index.css';
 
-import Game from "./game/game";
-import MyApp from "./welcome/welcome";
-import useStateDemo from "./hooks/useState/useState";
-import useMemoDemo from "./hooks/useMemo/useMemo";
-import {Clock, MyClock} from "./clock/clock";
+import Game from './game/game';
+import MyApp from './welcome/welcome';
+import useStateDemo from './hooks/useState/useState';
+import useMemoDemo from './hooks/useMemo/useMemo';
+import { Clock, MyClock } from './clock/clock';
 import ContextDemo from './context/contextDemo';
-import useRefDemo from "./hooks/useRef/useRef";
-import ReducerDemo from "./hooks/userReducer/useReducer";
+import useRefDemo from './hooks/useRef/useRef';
+import ReducerDemo from './hooks/userReducer/useReducer';
 import useEffectDemo from './hooks/useEffect/useEffectDemo';
 import UseContextDemo from './hooks/useContext/useContextDemo';
 import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 import CustomHooks from './hooks/customHooks/customHooks';
+import UseCallbackDemo from './hooks/useCallback/useCallback';
+import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
 
-const {Header, Sider, Content} = Layout;
-const {Item, SubMenu} = Menu;
+const { Header, Sider, Content } = Layout;
+const { Item, SubMenu } = Menu;
 
 function SideMenu() {
   const [collapsed, toggle] = useState(false);
@@ -37,6 +39,10 @@ function SideMenu() {
     setSelectedSubMenu([menuArray[0]]);
   }, [location]);
 
+  function menuClick({key}) {
+    setSelectedMenu(key);
+  }
+
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -46,6 +52,7 @@ function SideMenu() {
           defaultSelectedKeys={['game']}
           openKeys={selectedSubMenu}
           selectedKeys={selectedMenu}
+          onClick={menuClick}
         >
           <Item key="game">
             <span>Game</span>
@@ -102,11 +109,11 @@ function SideMenu() {
             </Item>
             <Item key="useCallback">
               <span>useCallback</span>
-              <Link to="/hooks/useCallback"></Link>
+              <Link to="/hooks/useCallback"/>
             </Item>
             <Item key="useLayoutEffect">
               <span>useLayoutEffect</span>
-              <Link to="/hooks/useLayoutEffect"></Link>
+              <Link to="/hooks/useLayoutEffect"/>
             </Item>
           </SubMenu>
         </Menu>
