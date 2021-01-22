@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 /**
  * useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
@@ -11,21 +11,27 @@ const UseCallbackDemo = () => {
 
   return (
     <>
-      <button onClick={() => {
-        setLisi(new Date().getTime());
-      }}>李四
+      <button
+        onClick={() => {
+          setLisi(new Date().getTime());
+        }}
+      >
+        李四
       </button>
-      <button onClick={() => {
-        setWangwu(new Date().getTime());
-      }}>王五
+      <button
+        onClick={() => {
+          setWangwu(new Date().getTime());
+        }}
+      >
+        王五
       </button>
       <ChildComponent name={lisi}>{wangwu}</ChildComponent>
     </>
   );
-}
+};
 
-function ChildComponent ({ name, children }) {
-  function changeLisi (name) {
+function ChildComponent({ name, children }) {
+  function changeLisi(name) {
     console.log('李四来了', name);
     return name + '李四来了！！！';
   }
@@ -33,13 +39,13 @@ function ChildComponent ({ name, children }) {
   // 解决不必要的渲染，优化性能
   // 第二个参数，name变化时，才重新渲染
   const actionLisi = useCallback(() => {
-    return changeLisi(name)
+    return changeLisi(name);
   }, [name]);
 
   return (
     <>
       <div>{actionLisi()}</div>
-      { /* 王五更新，李四每次也会打印，性能影响 */}
+      {/* 王五更新，李四每次也会打印，性能影响 */}
       {/* <div>{changeLisi()}</div> */}
       <div>{children}</div>
     </>

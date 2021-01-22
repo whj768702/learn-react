@@ -33,9 +33,12 @@ function SideMenu() {
   useEffect(() => {
     const currentPath = location.pathname.split('/');
     const menuArray = currentPath.splice(1);
-    console.log('menuArray: ', menuArray);
-    setSelectedMenu(menuArray);
-    // const path = ;
+    console.log('menuArray: ', menuArray, location.pathname);
+    if (menuArray[0] !== '') {
+      setSelectedMenu(menuArray);
+    } else {
+      setSelectedMenu(['game']);
+    }
     if (menuArray.length >= 2) {
       setSelectedSubMenu(menuArray);
     }
