@@ -36,21 +36,25 @@ function SideMenu() {
     console.log('menuArray: ', menuArray);
     setSelectedMenu(menuArray);
     // const path = ;
-    setSelectedSubMenu([menuArray[0]]);
+    if (menuArray.length >= 2) {
+      setSelectedSubMenu(menuArray);
+    }
   }, [location]);
 
-  function menuClick({key}) {
+  function menuClick({ key, keyPath }) {
+    console.log('key1111: ', key, keyPath);
     setSelectedMenu(key);
+    setSelectedSubMenu(keyPath);
   }
 
-  return (
-    <Layout>
+  const MenuList = () => {
+    return (
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={['game']}
-          openKeys={selectedSubMenu}
+          defaultOpenKeys={selectedSubMenu}
           selectedKeys={selectedMenu}
           onClick={menuClick}
         >
@@ -109,15 +113,21 @@ function SideMenu() {
             </Item>
             <Item key="useCallback">
               <span>useCallback</span>
-              <Link to="/hooks/useCallback"/>
+              <Link to="/hooks/useCallback" />
             </Item>
             <Item key="useLayoutEffect">
               <span>useLayoutEffect</span>
-              <Link to="/hooks/useLayoutEffect"/>
+              <Link to="/hooks/useLayoutEffect" />
             </Item>
           </SubMenu>
         </Menu>
       </Sider>
+    );
+  };
+
+  return (
+    <Layout>
+      <MenuList />
       <Layout>
         <Header style={{ background: '#fff', padding: 0 }}>
           {collapsed ? (
