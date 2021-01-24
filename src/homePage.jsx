@@ -80,7 +80,15 @@ function SideMenu() {
         if (item.children) {
           return (
             <SubMenu key={item.name} title={<span>{item.name}</span>}>
-              {GenerateMenu(item.children)}
+              {item.children.map((child) => {
+                return (
+                  <Item key={child.name}>
+                    <span>{child.name}</span>
+                    <Link to={'/' + item.name + '/' + child.name} />
+                  </Item>
+                );
+              })}
+              ;
             </SubMenu>
           );
         } else {
