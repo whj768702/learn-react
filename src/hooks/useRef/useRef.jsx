@@ -18,7 +18,7 @@ function useRefDemo() {
   });
   return (
     <>
-      <Input type="text" ref={inputEl} />
+      <Input type="text" ref={inputEl} /> {/* ant的input不好使，还不知道为啥。原声input好用。*/}
       <Button onClick={onButtonClick}>在input上展示文字</Button>
       <br />
       <br />
