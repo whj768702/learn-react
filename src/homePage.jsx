@@ -51,6 +51,48 @@ function SideMenu() {
   }
 
   const MenuList = () => {
+    const routerArray = [
+      { name: 'game', component: 'Game' },
+      { name: 'myApp', component: 'MyApp' },
+      { name: 'clock', component: 'Clock' },
+      { name: 'myClock', component: 'myClock' },
+      { name: 'Context', component: 'Context' },
+      {
+        name: 'hooks',
+        component: 'hooks',
+        children: [
+          { name: 'useState', component: 'useState' },
+          { name: 'useMemo', component: 'useMemo' },
+          { name: 'useRef', component: 'useRef' },
+          { name: 'useReducer1', component: 'userReducer1' },
+          { name: 'useEffect', component: 'useEffect' },
+          { name: 'useContext', component: 'useContext' },
+          { name: 'useReducer2', component: 'useReducer2' },
+          { name: 'customHooks', component: 'customHooks' },
+          { name: 'useCallback', component: 'useCallback' },
+          { name: 'useLayoutEffect', component: 'useLayoutEffect' },
+        ],
+      },
+    ];
+    const GenerateMenu = (routerArray) => {
+      console.log('router array: ', routerArray);
+      return routerArray.map((item) => {
+        if (item.children) {
+          return (
+            <SubMenu key={item.name} title={<span>{item.name}</span>}>
+              {GenerateMenu(item.children)}
+            </SubMenu>
+          );
+        } else {
+          return (
+            <Item key={item.name}>
+              <span>{item.name}</span>
+              <Link to={'/' + item.name} />
+            </Item>
+          );
+        }
+      });
+    };
     return (
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Menu
@@ -61,68 +103,7 @@ function SideMenu() {
           selectedKeys={selectedMenu}
           onClick={menuClick}
         >
-          <Item key="game">
-            <span>Game</span>
-            <Link to="/Game" />
-          </Item>
-          <Item key="myApp">
-            <span>MyApp</span>
-            <Link to="/MyApp" />
-          </Item>
-          <Item key="clock">
-            <span>Clock</span>
-            <Link to="/Clock" />
-          </Item>
-          <Item key="myClock">
-            <span>myClock</span>
-            <Link to="/myClock" />
-          </Item>
-          <Item key="/Context">
-            <span>Context</span>
-            <Link to="/Context" />
-          </Item>
-          <SubMenu key="hooks" title={<span>HOOKS</span>}>
-            <Item key="useState">
-              <span>useState</span>
-              <Link to="/hooks/useState" />
-            </Item>
-            <Item key="useMemo">
-              <span>useMemo</span>
-              <Link to="/hooks/useMemo" />
-            </Item>
-            <Item key="useRef">
-              <span>useRef</span>
-              <Link to="/hooks/useRef" />
-            </Item>
-            <Item key="useReducer1">
-              <span>useReducer1</span>
-              <Link to="/hooks/useReducer1" />
-            </Item>
-            <Item key="useEffect">
-              <span>useEffect</span>
-              <Link to="/hooks/useEffect" />
-            </Item>
-            <Item key="useContext">
-              <span>useContext</span>
-              <Link to="/hooks/useContext" />
-            </Item>
-            <Item key="useReducer2">
-              <span>useReducer2</span>
-              <Link to="/hooks/useReducer2" />
-            </Item>
-            <Item key="customHooks">
-              <span>customHooks</span>
-              <Link to="/hooks/customHooks" />
-            </Item>
-            <Item key="useCallback">
-              <span>useCallback</span>
-              <Link to="/hooks/useCallback" />
-            </Item>
-            <Item key="useLayoutEffect">
-              <span>useLayoutEffect</span>
-              <Link to="/hooks/useLayoutEffect" />
-            </Item>
-          </SubMenu>
+          {GenerateMenu(routerArray)}
         </Menu>
       </Sider>
     );
