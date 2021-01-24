@@ -7,8 +7,6 @@ import { Button } from 'antd';
  * returns the current context value for that context.
  */
 
-const CountContext = createContext(0);
-
 // object
 const themes = {
   light: {
@@ -32,6 +30,7 @@ function ThemedButton() {
   );
 }
 
+const CountContext = createContext(0);
 function ShowCount() {
   let count = useContext(CountContext);
   return <h2>child: value from parent: {count}</h2>;
@@ -42,7 +41,7 @@ const UseContextDemo = () => {
   const [count, setCount] = useState(0);
 
   const [theme, setTheme] = useState(themes.light);
-  const changeTheme = prev => {
+  const changeTheme = (prev) => {
     console.log('theme: ', prev);
     if (prev.background === '#eeeeee') {
       setTheme(themes.dark);
