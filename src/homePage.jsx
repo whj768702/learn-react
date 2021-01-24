@@ -64,7 +64,7 @@ function SideMenu() {
           { name: 'useState', component: 'useState' },
           { name: 'useMemo', component: 'useMemo' },
           { name: 'useRef', component: 'useRef' },
-          { name: 'useReducer1', component: 'userReducer1' },
+          { name: 'useReducer1', component: 'useReducer1' },
           { name: 'useEffect', component: 'useEffect' },
           { name: 'useContext', component: 'useContext' },
           { name: 'useReducer2', component: 'useReducer2' },
