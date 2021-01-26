@@ -12,7 +12,8 @@ function Buttons() {
   return (
     <div>
       <Button
-        type="primary"
+        type="text"
+        style={{ color: 'red' }}
         onClick={() => {
           dispatch({ type: UPDATE_COLOR, color: 'red' });
         }}
@@ -21,7 +22,7 @@ function Buttons() {
       </Button>
       <Button
         style={{ marginLeft: '4px' }}
-        type="primary"
+        type="text"
         onClick={() => {
           dispatch({ type: UPDATE_COLOR, color: 'yellow' });
         }}
