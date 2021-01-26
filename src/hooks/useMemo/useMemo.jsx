@@ -1,6 +1,11 @@
 import React, { useState, useMemo } from 'react';
-
 import { Button } from 'antd';
+
+/**
+ * 组件内有些方法，只想在其参数更改时运行它们，而不是每次组件更新都运行。
+ * 个人理解类似computed方式，依赖有变化了才更新。
+ * 缓存函数返回值
+ */
 
 function useMemoDemo() {
   const [lisi, setLisi] = useState('李四等待中');
