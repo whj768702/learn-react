@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
 import { Layout, Menu } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -21,6 +21,8 @@ import CustomHooks from './hooks/customHooks/customHooks';
 import UseCallbackDemo from './hooks/useCallback/useCallback';
 import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
 
+import { NumberListClass, NumberListFunction } from './key/key';
+
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
 
@@ -28,6 +30,9 @@ function SideMenu() {
   const [collapsed, toggle] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [selectedSubMenu, setSelectedSubMenu] = useState([]);
+
+  const [, setPath] = useState('/Game');
+  const [, setComponent] = useState();
 
   const location = window.location;
   useEffect(() => {
@@ -48,32 +53,41 @@ function SideMenu() {
     console.log('key1111: ', key, keyPath);
     setSelectedMenu(key);
     setSelectedSubMenu(keyPath);
+    setPath('/' + keyPath ? keyPath + '/' + key : key);
+    setComponent(key);
   }
+  const routerArray = [
+    { name: 'Game', component: Game },
+    { name: 'MyApp', component: MyApp, params: { names: 'whj' } },
+    { name: 'Clock', component: Clock },
+    { name: 'MyClock', component: MyClock },
+    { name: 'Context', component: ContextDemo },
+    {
+      name: 'hooks',
+      component: 'hooks',
+      children: [
+        { name: 'useState', component: useStateDemo },
+        { name: 'useMemo', component: useMemoDemo },
+        { name: 'useRef', component: useRefDemo },
+        { name: 'useReducer1', component: ReducerDemo },
+        { name: 'useEffect', component: useEffectDemo },
+        { name: 'useContext', component: UseContextDemo },
+        { name: 'useReducer2', component: UseReducerDemo },
+        { name: 'customHooks', component: CustomHooks },
+        { name: 'useCallback', component: UseCallbackDemo },
+        { name: 'useLayoutEffect', component: UseLayoutEffectDemo },
+      ],
+    },
+    {
+      name: 'key',
+      children: [
+        { name: 'class', component: NumberListClass },
+        { name: 'functional', component: NumberListFunction },
+      ],
+    },
+  ];
 
   const MenuList = () => {
-    const routerArray = [
-      { name: 'game', component: 'Game' },
-      { name: 'myApp', component: 'MyApp' },
-      { name: 'clock', component: 'Clock' },
-      { name: 'myClock', component: 'myClock' },
-      { name: 'Context', component: 'Context' },
-      {
-        name: 'hooks',
-        component: 'hooks',
-        children: [
-          { name: 'useState', component: 'useState' },
-          { name: 'useMemo', component: 'useMemo' },
-          { name: 'useRef', component: 'useRef' },
-          { name: 'useReducer1', component: 'useReducer1' },
-          { name: 'useEffect', component: 'useEffect' },
-          { name: 'useContext', component: 'useContext' },
-          { name: 'useReducer2', component: 'useReducer2' },
-          { name: 'customHooks', component: 'customHooks' },
-          { name: 'useCallback', component: 'useCallback' },
-          { name: 'useLayoutEffect', component: 'useLayoutEffect' },
-        ],
-      },
-    ];
     const GenerateMenu = (routerArray) => {
       console.log('router array: ', routerArray);
       return routerArray.map((item) => {
@@ -151,7 +165,19 @@ function SideMenu() {
             minHeight: 'calc(100vh - 112px)',
           }}
         >
-          <Route path="/Game" component={Game} />
+          <Switch>
+            {routerArray.map((route, index) => {
+              console.log('route: ', route);
+              return (
+                <Route
+                  key={index}
+                  path={'/' + route.name}
+                  render={() => <route.component {...route.params} />}
+                />
+              );
+            })}
+          </Switch>
+          {/* <Route path="/Game" component={Game} />
           <Route path="/MyApp" render={() => <MyApp names={'I'} />} />
           <Route path="/Clock" component={Clock} />
           <Route path="/MyClock" component={MyClock} />
@@ -166,6 +192,7 @@ function SideMenu() {
           <Route path="/hooks/customHooks" component={CustomHooks} />
           <Route path="/hooks/useCallback" component={UseCallbackDemo} />
           <Route path="/hooks/useLayoutEffect" component={UseLayoutEffectDemo} />
+          <Route path="/key/NumberListClass" component={NumberListClass} /> */}
         </Content>
       </Layout>
     </Layout>
