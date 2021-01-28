@@ -53,8 +53,8 @@ function SideMenu() {
     console.log('key1111: ', key, keyPath);
     setSelectedMenu(key);
     setSelectedSubMenu(keyPath);
-    setPath('/' + keyPath ? keyPath + '/' + key : key);
-    setComponent(key);
+    // setPath('/' + keyPath ? keyPath + '/' + key : key);
+    // setComponent(key);
   }
   const routerArray = [
     { name: 'Game', component: Game },
@@ -81,16 +81,15 @@ function SideMenu() {
     {
       name: 'key',
       children: [
-        { name: 'class', component: NumberListClass },
-        { name: 'functional', component: NumberListFunction },
+        { name: 'class', component: NumberListClass, params: { numbers: [1, 2, 3] } },
+        { name: 'functional', component: NumberListFunction, params: { numbers: [1, 2, 3] } },
       ],
     },
   ];
 
   const MenuList = () => {
     const GenerateMenu = (routerArray) => {
-      console.log('router array: ', routerArray);
-      return routerArray.map((item) => {
+      return routerArray.map((item, index) => {
         if (item.children) {
           return (
             <SubMenu key={item.name} title={<span>{item.name}</span>}>
@@ -102,12 +101,11 @@ function SideMenu() {
                   </Item>
                 );
               })}
-              ;
             </SubMenu>
           );
         } else {
           return (
-            <Item key={item.name}>
+            <Item key={item.name + index}>
               <span>{item.name}</span>
               <Link to={'/' + item.name} />
             </Item>
@@ -143,12 +141,12 @@ function SideMenu() {
               }}
             />
           ) : (
-            <MenuUnfoldOutlined
-              onClick={() => {
-                toggle(true);
-              }}
-            />
-          )}
+              <MenuUnfoldOutlined
+                onClick={() => {
+                  toggle(true);
+                }}
+              />
+            )}
           {/* <Icon
               className="trigger"
               type={collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -166,15 +164,26 @@ function SideMenu() {
           }}
         >
           <Switch>
-            {routerArray.map((route, index) => {
-              console.log('route: ', route);
-              return (
-                <Route
-                  key={index}
-                  path={'/' + route.name}
-                  render={() => <route.component {...route.params} />}
-                />
-              );
+            {routerArray.map(route => {
+              if (route.children) {
+                return route.children.map(childRoute => {
+                  return (
+                    <Route
+                      key={childRoute.name}
+                      path={'/' + route.name + '/' + childRoute.name}
+                      render={() => <childRoute.component {...childRoute.params} />}
+                    />
+                  );
+                });
+              } else {
+                return (
+                  <Route
+                    key={route.name}
+                    path={'/' + route.name}
+                    render={() => <route.component {...route.params} />}
+                  />
+                );
+              }
             })}
           </Switch>
           {/* <Route path="/Game" component={Game} />
@@ -195,7 +204,7 @@ function SideMenu() {
           <Route path="/key/NumberListClass" component={NumberListClass} /> */}
         </Content>
       </Layout>
-    </Layout>
+    </Layout >
   );
 }
 function Homepage() {
