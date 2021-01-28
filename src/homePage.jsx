@@ -31,14 +31,10 @@ function SideMenu() {
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [selectedSubMenu, setSelectedSubMenu] = useState([]);
 
-  const [, setPath] = useState('/Game');
-  const [, setComponent] = useState();
-
   const location = window.location;
   useEffect(() => {
     const currentPath = location.pathname.split('/');
     const menuArray = currentPath.splice(1);
-    console.log('menuArray: ', menuArray, location.pathname);
     if (menuArray[0] !== '') {
       setSelectedMenu(menuArray);
     } else {
@@ -50,15 +46,13 @@ function SideMenu() {
   }, [location]);
 
   function menuClick({ key, keyPath }) {
-    console.log('key1111: ', key, keyPath);
     setSelectedMenu(key);
     setSelectedSubMenu(keyPath);
-    // setPath('/' + keyPath ? keyPath + '/' + key : key);
-    // setComponent(key);
   }
+
   const routerArray = [
     { name: 'Game', component: Game },
-    { name: 'MyApp', component: MyApp, params: { names: 'whj' } },
+    { name: 'MyApp', component: MyApp, params: { names: ['ni', 'wo'] } },
     { name: 'Clock', component: Clock },
     { name: 'MyClock', component: MyClock },
     { name: 'Context', component: ContextDemo },
@@ -147,13 +141,6 @@ function SideMenu() {
                 }}
               />
             )}
-          {/* <Icon
-              className="trigger"
-              type={collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={() => {
-                toggle((collapsed = !collapsed));
-              }}
-            /> */}
         </Header>
         <Content
           style={{
@@ -186,22 +173,6 @@ function SideMenu() {
               }
             })}
           </Switch>
-          {/* <Route path="/Game" component={Game} />
-          <Route path="/MyApp" render={() => <MyApp names={'I'} />} />
-          <Route path="/Clock" component={Clock} />
-          <Route path="/MyClock" component={MyClock} />
-          <Route path="/Context" component={ContextDemo} />
-          <Route path="/hooks/useState" component={useStateDemo} />
-          <Route path="/hooks/useMemo" component={useMemoDemo} />
-          <Route path="/hooks/useRef" component={useRefDemo} />
-          <Route path="/hooks/useReducer1" component={ReducerDemo} />
-          <Route path="/hooks/useEffect" component={useEffectDemo} />
-          <Route path="/hooks/useContext" component={UseContextDemo} />
-          <Route path="/hooks/useReducer2" component={UseReducerDemo} />
-          <Route path="/hooks/customHooks" component={CustomHooks} />
-          <Route path="/hooks/useCallback" component={UseCallbackDemo} />
-          <Route path="/hooks/useLayoutEffect" component={UseLayoutEffectDemo} />
-          <Route path="/key/NumberListClass" component={NumberListClass} /> */}
         </Content>
       </Layout>
     </Layout >
