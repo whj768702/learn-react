@@ -46,6 +46,7 @@ function SideMenu() {
   }, [location]);
 
   function menuClick({ key, keyPath }) {
+    console.log('key: ', key, keyPath);
     setSelectedMenu(key);
     setSelectedSubMenu(keyPath);
   }
@@ -99,7 +100,7 @@ function SideMenu() {
           );
         } else {
           return (
-            <Item key={item.name + index}>
+            <Item key={item.name}>
               <span>{item.name}</span>
               <Link to={'/' + item.name} />
             </Item>
@@ -156,6 +157,7 @@ function SideMenu() {
                 return route.children.map(childRoute => {
                   return (
                     <Route
+                      exact
                       key={childRoute.name}
                       path={'/' + route.name + '/' + childRoute.name}
                       render={() => <childRoute.component {...childRoute.params} />}
@@ -165,6 +167,7 @@ function SideMenu() {
               } else {
                 return (
                   <Route
+                    exact
                     key={route.name}
                     path={'/' + route.name}
                     render={() => <route.component {...route.params} />}
