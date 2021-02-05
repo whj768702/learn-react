@@ -21,10 +21,9 @@ import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 import CustomHooks from './hooks/customHooks/customHooks';
 import UseCallbackDemo from './hooks/useCallback/useCallback';
 import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
-
 import { NumberListClass, NumberListFunction } from './key/key';
-
 import Calculator from './liftingStateUp/Calculator';
+import { NameForm, NameFormFunction, FlavorFormFunction } from './form/form';
 
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
@@ -86,6 +85,14 @@ function SideMenu() {
     {
       name: 'Calculator',
       component: Calculator
+    },
+    {
+      name: 'form',
+      children: [
+        { name: 'nameForm', component: NameForm },
+        { name: 'nameFormFunction', component: NameFormFunction },
+        { name: 'flavorForm', component: FlavorFormFunction },
+      ]
     }
   ];
 
@@ -143,12 +150,12 @@ function SideMenu() {
               }}
             />
           ) : (
-              <MenuUnfoldOutlined
-                onClick={() => {
-                  toggle(true);
-                }}
-              />
-            )}
+            <MenuUnfoldOutlined
+              onClick={() => {
+                toggle(true);
+              }}
+            />
+          )}
         </Header>
         <Content
           style={{
