@@ -10,7 +10,8 @@ import Game from './game/game';
 import MyApp from './welcome/welcome';
 import useStateDemo from './hooks/useState/useState';
 import useMemoDemo from './hooks/useMemo/useMemo';
-import { Clock, MyClock } from './clock/clock';
+import Clock from './clock/clock';
+import FunctionalClock from './clock/functionalClock';
 import ContextDemo from './context/contextDemo';
 import useRefDemo from './hooks/useRef/useRef';
 import ReducerDemo from './hooks/userReducer/useReducer';
@@ -22,6 +23,8 @@ import UseCallbackDemo from './hooks/useCallback/useCallback';
 import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
 
 import { NumberListClass, NumberListFunction } from './key/key';
+
+import Calculator from './liftingStateUp/Calculator';
 
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
@@ -47,7 +50,7 @@ function SideMenu() {
 
   function menuClick({ key, keyPath }) {
     console.log('key: ', key, keyPath);
-    setSelectedMenu(key);
+    setSelectedMenu([key]);
     setSelectedSubMenu(keyPath);
   }
 
@@ -55,7 +58,7 @@ function SideMenu() {
     { name: 'Game', component: Game },
     { name: 'MyApp', component: MyApp, params: { names: ['ni', 'wo'] } },
     { name: 'Clock', component: Clock },
-    { name: 'MyClock', component: MyClock },
+    { name: 'FunctionalClock', component: FunctionalClock },
     { name: 'Context', component: ContextDemo },
     {
       name: 'hooks',
@@ -80,6 +83,10 @@ function SideMenu() {
         { name: 'functional', component: NumberListFunction, params: { numbers: [1, 2, 3] } },
       ],
     },
+    {
+      name: 'Calculator',
+      component: Calculator
+    }
   ];
 
   const MenuList = () => {
@@ -158,6 +165,7 @@ function SideMenu() {
                   return (
                     <Route
                       exact
+                      strict
                       key={childRoute.name}
                       path={'/' + route.name + '/' + childRoute.name}
                       render={() => <childRoute.component {...childRoute.params} />}
@@ -168,6 +176,7 @@ function SideMenu() {
                 return (
                   <Route
                     exact
+                    strict
                     key={route.name}
                     path={'/' + route.name}
                     render={() => <route.component {...route.params} />}
