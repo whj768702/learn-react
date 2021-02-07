@@ -12,9 +12,9 @@ const Search = (props) => {
     <div>
       <label htmlFor="search">Search:</label>
       <input type="text" id="search" onChange={props.onSearch} />
-      {/* <p>
-        Searching for <strong>{searchTerm}</strong>.
-      </p> */}
+      <p>
+        Searching for <strong>{props.searchTerm}</strong>.
+      </p>
     </div>
   );
 }
@@ -64,7 +64,7 @@ const Road2React = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search onSearch={handleSearch} />
+      <Search searchTerm={searchTerm} onSearch={handleSearch} />
       <hr />
       <List list={searchedStories} />
     </div>
