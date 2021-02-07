@@ -13,17 +13,20 @@ const Search = ({ searchTerm, onSearch }) => {
   );
 }
 
-const Item = ({ title, url, author, num_comments, points }) => (
-  <div>
-    <span>
-      <a href={url}>{title}</a>
-    </span>
-    <span>{author}</span>
-    <span>{num_comments}</span>
-    <span>{points}</span>
-  </div>
-);
-const List = ({ list }) => list.map(({ objectID, ...item }) => <Item key={objectID} {...item} />)
+const Item = ({ item, onRemoveItem }) => {
+  return (
+    <div>
+      <span>
+        <a href={item.url}>{item.title}</a>
+      </span>
+      <span>{item.author}</span>
+      <span>{item.num_comments}</span>
+      <span>{item.points}</span>
+      <button type='button' onClick={() => onRemoveItem(item)}>dismiss</button>
+    </div>
+  )
+};
+const List = ({ list, onRemoveItem }) => list.map((item) => <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />)
 
 const useSemiPersistentState = (key, initialState) => {
   const [value, setValue] = useState(localStorage.getItem(key) || initialState);
@@ -55,9 +58,9 @@ const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, ch
 
 const Road2React = () => {
   // const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
-  const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'react');
+  const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
 
-  const stories = [
+  const initialStories = [
     {
       title: 'React',
       url: 'https://reactjs.org/',
@@ -76,12 +79,21 @@ const Road2React = () => {
     }
   ];
 
+  const [stories, setStories] = useState(initialStories);
+
+  const handleRemoveStory = item => {
+    const newStories = stories.filter(story => item.objectID !== story.objectID)
+
+    console.log('new stories: ', newStories, item);
+    setStories(newStories);
+  }
+
   const handleSearch = event => {
     console.log('value: ', event.target.value);
     setSearchTerm(event.target.value);
   }
 
-  const searchedStories = stories.filter(story => story.title.toLowerCase().includes(searchTerm));
+  const searchedStories = stories.filter(story => story.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const LabelInput = () => <strong>Search1:</strong>
 
@@ -99,7 +111,7 @@ const Road2React = () => {
         {/* <strong>Search:</strong> */}
       </InputWithLabel>
       <hr />
-      <List list={searchedStories} />
+      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
     </div>
   )
 }
