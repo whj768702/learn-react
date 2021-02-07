@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 const Search = ({ searchTerm, onSearch }) => {
   // const [searchTerm, setSearchTerm] = useState('');
 
@@ -32,7 +32,11 @@ const Item = ({ title, url, author, num_comments, points }) => (
 const List = ({ list }) => list.map(({ objectID, ...item }) => <Item key={objectID} {...item} />)
 
 const Road2React = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
+
+  useEffect(() => {
+    localStorage.setItem('search', searchedStories);
+  }, [searchTerm]);
 
   const stories = [
     {
