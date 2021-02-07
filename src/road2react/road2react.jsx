@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
+
 const Search = ({ searchTerm, onSearch }) => {
-  // const [searchTerm, setSearchTerm] = useState('');
-
-  // const handleChange = event => {
-  //   setSearchTerm(event.target.value);
-
-  //   props.onSearch(event);
-  // }
-
   return (
     <div>
       <label htmlFor="search">Search:</label>
@@ -31,12 +24,19 @@ const Item = ({ title, url, author, num_comments, points }) => (
 );
 const List = ({ list }) => list.map(({ objectID, ...item }) => <Item key={objectID} {...item} />)
 
-const Road2React = () => {
-  const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
+const useSemiPersistentState = (key, initialState) => {
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
 
   useEffect(() => {
-    localStorage.setItem('search', searchedStories);
-  }, [searchTerm]);
+    localStorage.setItem(key, value);
+  }, [value]);
+
+  return [value, setValue];
+}
+
+const Road2React = () => {
+  // const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
+  const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
 
   const stories = [
     {
