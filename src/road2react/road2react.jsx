@@ -1,3 +1,4 @@
+import { Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 const Search = ({ searchTerm, onSearch }) => {
@@ -34,6 +35,14 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 }
 
+const InputWithLabel = ({ id, label, value, type = 'text', onInputChange }) => (
+  <>
+    <label htmlFor={id}>{label}</label>
+  &nbsp;
+    <input id={id} type={type} value={value} onChange={onInputChange} />
+  </>
+)
+
 const Road2React = () => {
   // const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
@@ -67,7 +76,8 @@ const Road2React = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search searchTerm={searchTerm} onSearch={handleSearch} />
+      {/* <Search searchTerm={searchTerm} onSearch={handleSearch} /> */}
+      <InputWithLabel id='search2' label='Search2' value={searchTerm} onInputChange={handleSearch} />
       <hr />
       <List list={searchedStories} />
     </div>
