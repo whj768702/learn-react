@@ -35,9 +35,9 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 }
 
-const InputWithLabel = ({ id, label, value, type = 'text', onInputChange }) => (
+const InputWithLabel = ({ id, value, type = 'text', onInputChange, children }) => (
   <>
-    <label htmlFor={id}>{label}</label>
+    <label htmlFor={id}>{children}</label>
   &nbsp;
     <input id={id} type={type} value={value} onChange={onInputChange} />
   </>
@@ -73,11 +73,16 @@ const Road2React = () => {
 
   const searchedStories = stories.filter(story => story.title.toLowerCase().includes(searchTerm));
 
+  const LabelInput = () => <strong>Search1:</strong>
+
   return (
     <div>
       <h1>My Hacker Stories</h1>
       {/* <Search searchTerm={searchTerm} onSearch={handleSearch} /> */}
-      <InputWithLabel id='search2' label='Search2' value={searchTerm} onInputChange={handleSearch} />
+      <InputWithLabel id='search2' label='Search2' value={searchTerm} onInputChange={handleSearch}>
+        <LabelInput />
+        {/* <strong>Search:</strong> */}
+      </InputWithLabel>
       <hr />
       <List list={searchedStories} />
     </div>
