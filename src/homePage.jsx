@@ -24,6 +24,7 @@ import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
 import { NumberListClass, NumberListFunction } from './key/key';
 import Calculator from './liftingStateUp/Calculator';
 import { NameForm, NameFormFunction, FlavorFormFunction } from './form/form';
+import Road2React from './road2react/road2react';
 
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
@@ -93,7 +94,8 @@ function SideMenu() {
         { name: 'nameFormFunction', component: NameFormFunction },
         { name: 'flavorForm', component: FlavorFormFunction },
       ]
-    }
+    },
+    { name: 'road2React', component: Road2React }
   ];
 
   const MenuList = () => {
