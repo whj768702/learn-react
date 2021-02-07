@@ -1,5 +1,5 @@
 import { Input } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Search = ({ searchTerm, onSearch }) => {
   return (
@@ -35,17 +35,27 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 }
 
-const InputWithLabel = ({ id, value, type = 'text', onInputChange, children }) => (
-  <>
-    <label htmlFor={id}>{children}</label>
-  &nbsp;
-    <input id={id} type={type} value={value} onChange={onInputChange} />
-  </>
-)
+const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, children }) => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (isFocused && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFocused]);
+
+  return (
+    <>
+      <label htmlFor={id}>{children}</label>
+      &nbsp;
+      <input id={id} ref={inputRef} type={type} value={value} onChange={onInputChange} />
+    </>
+  );
+}
 
 const Road2React = () => {
   // const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
-  const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
+  const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'react');
 
   const stories = [
     {
@@ -79,7 +89,12 @@ const Road2React = () => {
     <div>
       <h1>My Hacker Stories</h1>
       {/* <Search searchTerm={searchTerm} onSearch={handleSearch} /> */}
-      <InputWithLabel id='search2' label='Search2' value={searchTerm} onInputChange={handleSearch}>
+      <InputWithLabel
+        id='search2'
+        label='Search2'
+        value={searchTerm}
+        isFocused
+        onInputChange={handleSearch}>
         <LabelInput />
         {/* <strong>Search:</strong> */}
       </InputWithLabel>
