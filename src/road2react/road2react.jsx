@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 const Search = (props) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
 
-  const handleChange = event => {
-    setSearchTerm(event.target.value);
+  // const handleChange = event => {
+  //   setSearchTerm(event.target.value);
 
-    props.onSearch(event);
-  }
+  //   props.onSearch(event);
+  // }
 
   return (
     <div>
       <label htmlFor="search">Search:</label>
-      <input type="text" id="search" onChange={handleChange} />
-      <p>
+      <input type="text" id="search" onChange={props.onSearch} />
+      {/* <p>
         Searching for <strong>{searchTerm}</strong>.
-      </p>
+      </p> */}
     </div>
   );
 }
@@ -33,6 +33,8 @@ const List = props => {
 }
 
 const Road2React = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   const stories = [
     {
       title: 'React',
@@ -54,14 +56,17 @@ const Road2React = () => {
 
   const handleSearch = event => {
     console.log('value: ', event.target.value);
+    setSearchTerm(event.target.value);
   }
+
+  const searchedStories = stories.filter(story => story.title.toLowerCase().includes(searchTerm));
 
   return (
     <div>
       <h1>My Hacker Stories</h1>
       <Search onSearch={handleSearch} />
       <hr />
-      <List list={stories} />
+      <List list={searchedStories} />
     </div>
   )
 }
