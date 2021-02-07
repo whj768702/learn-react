@@ -2,5 +2,6 @@
   "editor.formatOnSave": true,
   "prettier.jsxBracketSameLine": true,
   "editor.fontSize": 16,
-  "vim.foldfix": true
+  "vim.foldfix": true,
+  "editor.tabSize": 2
 }
