@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 const useSemiPersistentState = (key, initialState) => {
   const [value, setValue] = useState(localStorage.getItem(key) || initialState);
@@ -66,18 +66,38 @@ const initialStories = [
 
 const getAsynStories = () => new Promise(resolve => setTimeout(() => resolve({ data: { stories: initialStories } }), 2000));
 
+const storiesReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_STORIES': {
+      return action.payload;
+    }
+    case 'REMOVE_STORY': {
+      return state.filter(story => action.payload.objectID !== story.objectID)
+    }
+    default: {
+      throw new Error();
+    }
+  }
+}
+
 const Road2React = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
-  const [stories, setStories] = useState([]);
+  const [stories, dispatchStories] = useReducer(storiesReducer, []);
 
   useEffect(async () => {
     const result = await getAsynStories()
-    setStories(result.data.stories);
+    dispatchStories({
+      type: 'SET_STORIES',
+      payload: result.data.stories
+    });
+    // setStories(result.data.stories);
   }, []);
 
   const handleRemoveStory = item => {
-    const newStories = stories.filter(story => item.objectID !== story.objectID)
-    setStories(newStories);
+    dispatchStories({
+      type: 'REMOVE_STORY',
+      payload: item
+    });
   }
 
   const handleSearch = event => {
