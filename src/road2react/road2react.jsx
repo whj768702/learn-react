@@ -45,34 +45,35 @@ const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, ch
   );
 }
 
-const initialStories = [
-  {
-    title: 'React',
-    url: 'https://reactjs.org/',
-    author: 'Jordan Walke',
-    num_comments: 3,
-    points: 4,
-    objectID: 0,
-  },
-  {
-    title: 'Redux',
-    url: 'https://redux.js.org/',
-    author: 'Dan Abramov, Andrew Clark',
-    num_comments: 2,
-    points: 5,
-    objectID: 1,
-  }
-];
-
-const getAsynStories = () => new Promise(resolve => setTimeout(() => resolve({ data: { stories: initialStories } }), 2000));
-
 const storiesReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_STORIES': {
-      return action.payload;
+    case 'STORIES_FETCH_INIT': {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      }
+    }
+    case 'STORIES_FETCH_SUCCES': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload
+      }
+    }
+    case 'STORIES_FETCH_FAILURE': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      }
     }
     case 'REMOVE_STORY': {
-      return state.filter(story => action.payload.objectID !== story.objectID)
+      return {
+        ...state,
+        data: state.data.filter(story => action.payload.objectID !== story.objectID)
+      }
     }
     default: {
       throw new Error();
@@ -80,17 +81,35 @@ const storiesReducer = (state, action) => {
   }
 }
 
+const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
+
+const getAsynstories = async (query) => {
+  const response = await fetch(`${API_ENDPOINT}${query}`);
+  if (response.status === 200) {
+    return response.json();
+  } else {
+    return null;
+  }
+}
+
 const Road2React = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
-  const [stories, dispatchStories] = useReducer(storiesReducer, []);
+  const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
 
   useEffect(async () => {
-    const result = await getAsynStories()
-    dispatchStories({
-      type: 'SET_STORIES',
-      payload: result.data.stories
-    });
-    // setStories(result.data.stories);
+    dispatchStories({ type: 'STORIES_FETCH_INIT' });
+
+    const result = await getAsynstories('react');
+    if (result) {
+      dispatchStories({
+        type: 'STORIES_FETCH_SUCCES',
+        payload: result.hits
+      });
+    } else {
+      dispatchStories({
+        type: 'STORIES_FETCH_FAILURE'
+      });
+    }
   }, []);
 
   const handleRemoveStory = item => {
@@ -104,22 +123,25 @@ const Road2React = () => {
     setSearchTerm(event.target.value);
   }
 
-  const searchedStories = stories.filter(story => story.title.toLowerCase().includes(searchTerm.toLowerCase()));
-  const LabelInput = () => <strong>Search1:</strong>
+  const searchedStories = stories.data.filter(story => story.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  const Labelinput = () => <strong>search1:</strong>
 
   return (
     <div>
-      <h1>My Hacker Stories</h1>
+      <h1>my hacker stories</h1>
       <InputWithLabel
         id='search2'
-        label='Search2'
+        label='search2'
         value={searchTerm}
         isFocused
         onInputChange={handleSearch}>
-        <LabelInput />
+        <Labelinput />
       </InputWithLabel>
       <hr />
-      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+      {stories.isError && <p>Something went wrong...</p>}
+      {stories.isLoading ? (<p>Loading...</p>) : (
+        <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+      )}
     </div>
   )
 }
