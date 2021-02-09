@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import axios from 'axios';
 
 const useSemiPersistentState = (key, initialState) => {
   const [value, setValue] = useState(localStorage.getItem(key) || initialState);
@@ -84,9 +85,9 @@ const storiesReducer = (state, action) => {
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
 const getAsynstories = async (query) => {
-  const response = await fetch(`${API_ENDPOINT}${query}`);
+  const response = await axios.get(`${API_ENDPOINT}${query}`);
   if (response.status === 200) {
-    return response.json();
+    return response.data;
   } else {
     return null;
   }
