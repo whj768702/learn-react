@@ -97,9 +97,11 @@ const Road2React = () => {
   const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
 
   useEffect(async () => {
+    if (searchTerm === '') return;
+
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
-    const result = await getAsynstories('react');
+    const result = await getAsynstories(searchTerm);
     if (result) {
       dispatchStories({
         type: 'STORIES_FETCH_SUCCES',
@@ -110,7 +112,7 @@ const Road2React = () => {
         type: 'STORIES_FETCH_FAILURE'
       });
     }
-  }, []);
+  }, [searchTerm]);
 
   const handleRemoveStory = item => {
     dispatchStories({
@@ -123,7 +125,6 @@ const Road2React = () => {
     setSearchTerm(event.target.value);
   }
 
-  const searchedStories = stories.data.filter(story => story.title.toLowerCase().includes(searchTerm.toLowerCase()));
   const Labelinput = () => <strong>search1:</strong>
 
   return (
@@ -140,7 +141,7 @@ const Road2React = () => {
       <hr />
       {stories.isError && <p>Something went wrong...</p>}
       {stories.isLoading ? (<p>Loading...</p>) : (
-        <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+        <List list={stories.data} onRemoveItem={handleRemoveStory} />
       )}
     </div>
   )
