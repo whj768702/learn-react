@@ -130,24 +130,30 @@ const Road2React = () => {
     setSearchTerm(event.target.value);
   }
 
-  const handlesearchSubmit = () => {
+  const handleSearchSubmit = (event) => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
+    event.preventDefault();
   }
 
   const Labelinput = () => <strong>search1:</strong>
 
+  const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
+    <form onSubmit={onSearchSubmit}>
+      <InputWithLabel
+        id='search2'
+        value={searchTerm}
+        isFocused
+        onInputChange={onSearchInput}>
+        <Labelinput />
+      </InputWithLabel>
+      <button type='submit' disabled={!searchTerm}>submit</button>
+    </form>
+  );
+
   return (
     <div>
       <h1>my hacker stories</h1>
-      <InputWithLabel
-        id='search2'
-        label='search2'
-        value={searchTerm}
-        isFocused
-        onInputChange={handleSearch}>
-        <Labelinput />
-      </InputWithLabel>
-      <button type='button' disabled={!searchTerm} onClick={handlesearchSubmit}>submit</button>
+      <SearchForm searchTerm={searchTerm} onSearchInput={handleSearch} onSearchSubmit={handleSearchSubmit} />
       <hr />
       {stories.isError && <p>Something went wrong...</p>}
       {stories.isLoading ? (<p>Loading...</p>) : (
