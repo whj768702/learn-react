@@ -94,11 +94,11 @@ const getAsynstories = async (query) => {
 
 const Road2React = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
+  const [url, setUrl] = useState(`${API_ENDPOINT}${searchTerm}`);
+
   const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
 
   const handleFetchStories = useCallback(async () => {
-    if (searchTerm === '') return;
-
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
     const result = await getAsynstories(searchTerm);
@@ -112,7 +112,7 @@ const Road2React = () => {
         type: 'STORIES_FETCH_FAILURE'
       });
     }
-  }, [searchTerm]);
+  }, [url]);
 
   useEffect(() => {
     handleFetchStories();
@@ -129,6 +129,10 @@ const Road2React = () => {
     setSearchTerm(event.target.value);
   }
 
+  const handlesearchSubmit = () => {
+    setUrl(`${API_ENDPOINT}${searchTerm}`);
+  }
+
   const Labelinput = () => <strong>search1:</strong>
 
   return (
@@ -142,6 +146,7 @@ const Road2React = () => {
         onInputChange={handleSearch}>
         <Labelinput />
       </InputWithLabel>
+      <button type='button' disabled={!searchTerm} onClick={handlesearchSubmit}>submit</button>
       <hr />
       {stories.isError && <p>Something went wrong...</p>}
       {stories.isLoading ? (<p>Loading...</p>) : (
