@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 
 const useSemiPersistentState = (key, initialState) => {
   const [value, setValue] = useState(localStorage.getItem(key) || initialState);
@@ -96,7 +96,7 @@ const Road2React = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
   const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
 
-  useEffect(async () => {
+  const handleFetchStories = useCallback(async () => {
     if (searchTerm === '') return;
 
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
@@ -113,6 +113,10 @@ const Road2React = () => {
       });
     }
   }, [searchTerm]);
+
+  useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
 
   const handleRemoveStory = item => {
     dispatchStories({
