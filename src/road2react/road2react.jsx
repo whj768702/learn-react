@@ -2,6 +2,9 @@ import React, { memo, useCallback, useEffect, useReducer, useRef, useState } fro
 import axios from 'axios';
 import './road2react.css';
 
+import List from './List/List';
+import SearchForm from './SearchForm/SearchForm';
+
 const useSemiPersistentState = (key, initialState) => {
   const isMounted = useRef(false);
 
@@ -21,43 +24,6 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 }
 
-const Item = ({ item, onRemoveItem }) => {
-  return (
-    <div className='item'>
-      <span style={{ width: '40%' }}>
-        <a href={item.url}>{item.title}</a>
-      </span>
-      <span style={{ width: '30%' }}>{item.author}</span>
-      <span style={{ width: '10%' }}>{item.num_comments}</span>
-      <span style={{ width: '10%' }}>{item.points}</span>
-      <span style={{ width: '10%' }}>
-        <button type='button'
-          onClick={() => onRemoveItem(item)}
-          className='button button_small'>dismiss</button>
-      </span>
-    </div>
-  )
-};
-const List = memo(({ list, onRemoveItem }) => console.log('B:List') || list.map((item) => <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />))
-
-const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, children }) => {
-  const inputRef = useRef();
-
-  useEffect(() => {
-    if (isFocused && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  return (
-    <>
-      <label htmlFor={id} className='label'>{children}</label>
-      &nbsp;
-      <input id={id} ref={inputRef} type={type}
-        value={value} onChange={onInputChange} className='input' />
-    </>
-  );
-}
 
 const storiesReducer = (state, action) => {
   switch (action.type) {
@@ -105,21 +71,6 @@ const getAsynstories = async (query) => {
     return null;
   }
 }
-
-const Labelinput = () => <strong>search1:</strong>
-
-const SearchForm = memo(({ searchTerm, onSearchInput, onSearchSubmit }) => console.log('B:Search') || (
-  <form onSubmit={onSearchSubmit} className='search-form'>
-    <InputWithLabel
-      id='search2'
-      value={searchTerm}
-      isFocused
-      onInputChange={onSearchInput}>
-      <Labelinput />
-    </InputWithLabel>
-    <button type='submit' disabled={!searchTerm} className='button button_large'>submit</button>
-  </form>
-));
 
 const Road2React = () => {
   console.log('B:Road2React');
