@@ -1,15 +1,22 @@
-import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import axios from 'axios';
 import './road2react.css';
 
 const useSemiPersistentState = (key, initialState) => {
+  const isMounted = useRef(false);
+
   const [value, setValue] = useState(localStorage.getItem(key) || initialState);
 
   useEffect(() => {
-    if (value) {
-      localStorage.setItem(key, value);
+    if (!isMounted.current) {
+      isMounted.current = true;
+    } else {
+      console.log('A');
+      if (value) {
+        localStorage.setItem(key, value);
+      }
     }
-  }, [value]);
+  }, [value, key]);
 
   return [value, setValue];
 }
@@ -31,7 +38,7 @@ const Item = ({ item, onRemoveItem }) => {
     </div>
   )
 };
-const List = ({ list, onRemoveItem }) => list.map((item) => <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />)
+const List = memo(({ list, onRemoveItem }) => console.log('B:List') || list.map((item) => <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />))
 
 const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, children }) => {
   const inputRef = useRef();
@@ -115,6 +122,7 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
 );
 
 const Road2React = () => {
+  console.log('B:Road2React');
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
   const [url, setUrl] = useState(`${API_ENDPOINT}${searchTerm}`);
 
@@ -140,12 +148,12 @@ const Road2React = () => {
     handleFetchStories();
   }, [handleFetchStories]);
 
-  const handleRemoveStory = item => {
+  const handleRemoveStory = useCallback(item => {
     dispatchStories({
       type: 'REMOVE_STORY',
       payload: item
     });
-  }
+  }, []);
 
   const handleSearch = event => {
     setSearchTerm(event.target.value);
