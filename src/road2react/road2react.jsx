@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import axios from 'axios';
 import './road2react.css';
 
@@ -51,7 +51,7 @@ const storiesReducer = (state, action) => {
     case 'REMOVE_STORY': {
       return {
         ...state,
-        data: state.data.fjilter(story => action.payload.objectID !== story.objectID)
+        data: state.data.filter(story => action.payload.objectID !== story.objectID)
       }
     }
     case 'STORIES_PAGE': {
@@ -120,7 +120,7 @@ const Road2React = () => {
     }
   }
 
-  const handleFetchStories = useCallback(getStories, [urls]);
+  const handleFetchStories = useCallback(() => getStories(), [urls]);
 
   useEffect(() => {
     handleFetchStories();
@@ -153,7 +153,6 @@ const Road2React = () => {
     console.log('stories more: ', stories.page);
     dispatchStories({ type: 'STORIES_PAGE', payload: { page: stories.page + 1 } });
   }
-  useEffect(getStories, [stories.page])
 
   return (
     <div>

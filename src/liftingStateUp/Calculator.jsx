@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { directive } from "@babel/types";
 
 const scaleNames = {
   c: "Celsius",
@@ -7,7 +6,7 @@ const scaleNames = {
 };
 
 function toCelsius(fahrenheit) {
-  return (fahrenheit - 32) * 5 /9;
+  return (fahrenheit - 32) * 5 / 9;
 }
 function toFahrenheit(celsius) {
   return (celsius * 9 / 5) + 32;
@@ -65,14 +64,14 @@ function TemperatureInput(props) {
 // }
 
 function Calculator(props) {
-  const [{temperature, scale}, setTemperature] = useState({temperature:'', scale: 'c'});
+  const [{ temperature, scale }, setTemperature] = useState({ temperature: '', scale: 'c' });
 
   function handleCelsiusChange(temperature) {
-    setTemperature({scale: 'c', temperature: temperature})
+    setTemperature({ scale: 'c', temperature: temperature })
   }
 
   function handleFahrenheitChange(temperature) {
-    setTemperature({scale: 'f', temperature: temperature});
+    setTemperature({ scale: 'f', temperature: temperature });
   }
 
   const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
@@ -81,14 +80,14 @@ function Calculator(props) {
   return (
     <div>
       <TemperatureInput
-        scale="c" 
+        scale="c"
         temperature={celsius}
-        onTemperatureChange={handleCelsiusChange}/>
+        onTemperatureChange={handleCelsiusChange} />
       <TemperatureInput
         scale="f"
         temperature={fahrenheit}
-        onTemperatureChange={handleFahrenheitChange}/>
-      <BoilingVerdict celsius={parseFloat(celsius)}/>
+        onTemperatureChange={handleFahrenheitChange} />
+      <BoilingVerdict celsius={parseFloat(celsius)} />
     </div>
   );
 }
