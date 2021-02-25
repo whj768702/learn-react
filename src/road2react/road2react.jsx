@@ -24,7 +24,6 @@ const useSemiPersistentState = (key, initialState) => {
   return [value, setValue];
 }
 
-
 const storiesReducer = (state, action) => {
   switch (action.type) {
     case 'STORIES_FETCH_INIT': {
@@ -39,7 +38,7 @@ const storiesReducer = (state, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload
+        data: state.page === 0 ? action.payload.list : state.data.concat(action.payload.list),
       }
     }
     case 'STORIES_FETCH_FAILURE': {
@@ -52,7 +51,13 @@ const storiesReducer = (state, action) => {
     case 'REMOVE_STORY': {
       return {
         ...state,
-        data: state.data.filter(story => action.payload.objectID !== story.objectID)
+        data: state.data.fjilter(story => action.payload.objectID !== story.objectID)
+      }
+    }
+    case 'STORIES_PAGE': {
+      return {
+        ...state,
+        page: action.payload.page
       }
     }
     default: {
@@ -61,7 +66,11 @@ const storiesReducer = (state, action) => {
   }
 }
 
-const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
+const API_BASE = 'https://hn.algolia.com/api/v1';
+const API_SEARCH = '/search';
+const PARAM_SEARCH = 'query=';
+const PARAM_PAGE = 'page='
+// const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
 const getAsynstories = async (url) => {
   const response = await axios.get(url);
@@ -73,7 +82,7 @@ const getAsynstories = async (url) => {
 }
 
 const getLastSearchs = urls => Array.from(new Set(urls)).slice(-6, -1);
-const getUrl = searchTerm => `${API_ENDPOINT}${searchTerm}`;
+const getUrl = (searchTerm, page) => `${API_BASE}${API_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`;
 
 const LastSearches = ({ lastSearches, onLastSearch }) => (
   <>
@@ -88,25 +97,30 @@ const Road2React = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
   const [urls, setUrls] = useState([searchTerm]);
 
-  const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
+  const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], page: 0, isLoading: false, isError: false });
 
-  const handleFetchStories = useCallback(async () => {
+  const getStories = async () => {
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
+    console.log('fetch: ', stories.page);
 
-    const lastUrl = getUrl(urls[urls.length - 1]);
+    const lastUrl = getUrl(urls[urls.length - 1], stories.page);
 
     const result = await getAsynstories(lastUrl);
     if (result) {
       dispatchStories({
         type: 'STORIES_FETCH_SUCCES',
-        payload: result.hits
+        payload: {
+          list: result.hits,
+        }
       });
     } else {
       dispatchStories({
         type: 'STORIES_FETCH_FAILURE'
       });
     }
-  }, [urls]);
+  }
+
+  const handleFetchStories = useCallback(getStories, [urls]);
 
   useEffect(() => {
     handleFetchStories();
@@ -135,14 +149,21 @@ const Road2React = () => {
 
   const lastSearches = getLastSearchs(urls);
 
+  const handleMore = () => {
+    console.log('stories more: ', stories.page);
+    dispatchStories({ type: 'STORIES_PAGE', payload: { page: stories.page + 1 } });
+  }
+  useEffect(getStories, [stories.page])
+
   return (
     <div>
       <h1>my hacker stories</h1>
       <SearchForm searchTerm={searchTerm} onSearchInput={handleSearch} onSearchSubmit={handleSearchSubmit} />
       <LastSearches lastSearches={lastSearches} onLastSearch={handleLastSearch} />
+      <List list={stories.data} onRemoveItem={handleRemoveStory} />
       {stories.isError && <p>Something went wrong...</p>}
       {stories.isLoading ? (<p>Loading...</p>) : (
-        <List list={stories.data} onRemoveItem={handleRemoveStory} />
+        <button type='button' onClick={handleMore}>More</button>
       )}
     </div>
   )
