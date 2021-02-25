@@ -63,8 +63,8 @@ const storiesReducer = (state, action) => {
 
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
-const getAsynstories = async (query) => {
-  const response = await axios.get(`${API_ENDPOINT}${query}`);
+const getAsynstories = async (url) => {
+  const response = await axios.get(url);
   if (response.status === 200) {
     return response.data;
   } else {
@@ -72,17 +72,22 @@ const getAsynstories = async (query) => {
   }
 }
 
+const getLastSearchs = urls => Array.from(new Set(urls)).slice(-6, -1);
+const getUrl = searchTerm => `${API_ENDPOINT}${searchTerm}`;
+
 const Road2React = () => {
   console.log('B:Road2React');
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
-  const [url, setUrl] = useState(`${API_ENDPOINT}${searchTerm}`);
+  const [urls, setUrls] = useState([searchTerm]);
 
   const [stories, dispatchStories] = useReducer(storiesReducer, { data: [], isLoading: false, isError: false });
 
   const handleFetchStories = useCallback(async () => {
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
-    const result = await getAsynstories(searchTerm);
+    const lastUrl = getUrl(urls[urls.length - 1]);
+
+    const result = await getAsynstories(lastUrl);
     if (result) {
       dispatchStories({
         type: 'STORIES_FETCH_SUCCES',
@@ -93,7 +98,7 @@ const Road2React = () => {
         type: 'STORIES_FETCH_FAILURE'
       });
     }
-  }, [url]);
+  }, [urls]);
 
   useEffect(() => {
     handleFetchStories();
@@ -111,14 +116,24 @@ const Road2React = () => {
   }, []);
 
   const handleSearchSubmit = useCallback((event) => {
-    setUrl(`${API_ENDPOINT}${searchTerm}`);
+    setUrls(urls.concat(searchTerm));
     event.preventDefault();
   }, [searchTerm]);
+
+  const handleLastSearch = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    setUrls(urls.concat(searchTerm));
+  }
+
+  const lastSearches = getLastSearchs(urls);
 
   return (
     <div>
       <h1>my hacker stories</h1>
       <SearchForm searchTerm={searchTerm} onSearchInput={handleSearch} onSearchSubmit={handleSearchSubmit} />
+      {lastSearches.map((searchTerm, index) => (
+        <button key={searchTerm + index} type='button' onClick={() => handleLastSearch(searchTerm)}>{searchTerm}</button>
+      ))}
       {stories.isError && <p>Something went wrong...</p>}
       {stories.isLoading ? (<p>Loading...</p>) : (
         <List list={stories.data} onRemoveItem={handleRemoveStory} />
