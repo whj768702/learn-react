@@ -108,7 +108,7 @@ const getAsynstories = async (query) => {
 
 const Labelinput = () => <strong>search1:</strong>
 
-const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
+const SearchForm = memo(({ searchTerm, onSearchInput, onSearchSubmit }) => console.log('B:Search') || (
   <form onSubmit={onSearchSubmit} className='search-form'>
     <InputWithLabel
       id='search2'
@@ -119,7 +119,7 @@ const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => (
     </InputWithLabel>
     <button type='submit' disabled={!searchTerm} className='button button_large'>submit</button>
   </form>
-);
+));
 
 const Road2React = () => {
   console.log('B:Road2React');
@@ -155,14 +155,14 @@ const Road2React = () => {
     });
   }, []);
 
-  const handleSearch = event => {
+  const handleSearch = useCallback(event => {
     setSearchTerm(event.target.value);
-  }
+  }, []);
 
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = useCallback((event) => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
     event.preventDefault();
-  }
+  }, [searchTerm]);
 
   return (
     <div>
