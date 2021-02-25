@@ -75,6 +75,14 @@ const getAsynstories = async (url) => {
 const getLastSearchs = urls => Array.from(new Set(urls)).slice(-6, -1);
 const getUrl = searchTerm => `${API_ENDPOINT}${searchTerm}`;
 
+const LastSearches = ({ lastSearches, onLastSearch }) => (
+  <>
+    {lastSearches.map((searchTerm, index) => (
+      <button key={searchTerm + index} type='button' onClick={() => onLastSearch(searchTerm)}>{searchTerm}</button>
+    ))}
+  </>
+)
+
 const Road2React = () => {
   console.log('B:Road2React');
   const [searchTerm, setSearchTerm] = useSemiPersistentState('search', '');
@@ -131,9 +139,7 @@ const Road2React = () => {
     <div>
       <h1>my hacker stories</h1>
       <SearchForm searchTerm={searchTerm} onSearchInput={handleSearch} onSearchSubmit={handleSearchSubmit} />
-      {lastSearches.map((searchTerm, index) => (
-        <button key={searchTerm + index} type='button' onClick={() => handleLastSearch(searchTerm)}>{searchTerm}</button>
-      ))}
+      <LastSearches lastSearches={lastSearches} onLastSearch={handleLastSearch} />
       {stories.isError && <p>Something went wrong...</p>}
       {stories.isLoading ? (<p>Loading...</p>) : (
         <List list={stories.data} onRemoveItem={handleRemoveStory} />
