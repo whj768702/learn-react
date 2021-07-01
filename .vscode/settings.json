@@ -3,5 +3,8 @@
   "prettier.jsxBracketSameLine": true,
   "editor.fontSize": 16,
   "vim.foldfix": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
 }
