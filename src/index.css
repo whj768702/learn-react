@@ -1,13 +1,17 @@
 @import '~antd/dist/antd.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+  font: 14px 'Century Gothic', Futura, sans-serif;
   height: 100vh;
 }
 
 .board-row:after {
   clear: both;
-  content: "";
+  content: '';
   display: table;
 }
 
