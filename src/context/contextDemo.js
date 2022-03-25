@@ -11,19 +11,19 @@ import ThemeTogglerButton from './themeTogglerButton';
 //   );
 // }
 
-class ContextDemo extends React.Component{
+class ContextDemo extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggleTheme = () => {
-      this.setState(state => ({
-        theme: state.theme === themes.dark ? themes.light : themes.dark
+      this.setState((state) => ({
+        theme: state.theme === themes.dark ? themes.light : themes.dark,
       }));
     };
 
     this.state = {
       theme: themes.light,
-      toggleTheme: this.toggleTheme
+      toggleTheme: this.toggleTheme,
     };
   }
 

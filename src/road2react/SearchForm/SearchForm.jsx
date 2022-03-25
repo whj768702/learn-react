@@ -18,9 +18,9 @@ const InputWithLabel = ({ id, value, type = 'text', onInputChange, isFocused, ch
         value={value} onChange={onInputChange} className='input' />
     </>
   );
-}
+};
 
-const Labelinput = () => <strong>search1:</strong>
+const Labelinput = () => <strong>search1:</strong>;
 
 const SearchForm = ({ searchTerm, onSearchInput, onSearchSubmit }) => console.log('B:Search') || (
   <form onSubmit={onSearchSubmit} className='search-form'>

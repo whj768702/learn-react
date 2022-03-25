@@ -24,7 +24,5 @@ export const Color = (props) => {
   const [color, dispatch] = useReducer(reducer, 'blue');
 
   // 共享的状态中传递dispatch和color值
-  return (
-    <ColorContext.Provider value={{ color, dispatch }}>{props.children}</ColorContext.Provider>
-  );
+  return <ColorContext.Provider value={{ color, dispatch }}>{props.children}</ColorContext.Provider>;
 };

@@ -21,15 +21,13 @@ function ReducerDemo() {
       <Button
         onClick={() => {
           dispatch('add');
-        }}
-      >
+        }}>
         add
       </Button>
       <Button
         onClick={() => {
           dispatch('sub');
-        }}
-      >
+        }}>
         sub
       </Button>
     </div>

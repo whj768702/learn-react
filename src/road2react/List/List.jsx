@@ -6,14 +6,14 @@ const SortArrow = ({ sort, currentKey }) => {
   if (sort.sortKey === currentKey) {
     return (<span>{sort.isReverse ? '升' : '降'}</span>);
   } else {
-    return (<></>)
+    return (<></>);
   }
-}
+};
 
 const ColumnHeader = ({ sort, onSort }) => {
   const handleSort = (key) => {
     onSort(key);
-  }
+  };
   console.log('sort: ', sort);
 
   return (
@@ -37,7 +37,7 @@ const ColumnHeader = ({ sort, onSort }) => {
       <span style={{ width: '10%' }}>Actions</span>
     </div>
   );
-}
+};
 const Item = ({ item, onRemoveItem }) => {
   return (
     <div className='item'>
@@ -53,7 +53,7 @@ const Item = ({ item, onRemoveItem }) => {
           className='button button_small'>dismiss</button>
       </span>
     </div>
-  )
+  );
 };
 const SORTS = {
   NONE: list => list,
@@ -72,7 +72,7 @@ const List = ({ list, onRemoveItem }) => {
   const handleSort = (key) => {
     const isReverse = sort.sortKey === key && !sort.isReverse;
     setSort({ sortKey: key, isReverse: isReverse });
-  }
+  };
   const sortFunction = SORTS[sort.sortKey];
   const sortedList = sort.isReverse ? sortFunction(list).reverse() : sortFunction(list);
 
@@ -82,7 +82,7 @@ const List = ({ list, onRemoveItem }) => {
       {sortedList.map((item) => <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
       )}
     </div>
-  )
-}
+  );
+};
 
 export default memo(List);

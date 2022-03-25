@@ -25,6 +25,7 @@ import { NumberListClass, NumberListFunction } from './key/key';
 import Calculator from './liftingStateUp/Calculator';
 import { NameForm, NameFormFunction, FlavorFormFunction } from './form/form';
 import Road2React from './road2react/road2react';
+import Example from './composition/composition';
 
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
@@ -55,6 +56,7 @@ function SideMenu() {
   }
 
   const routerArray = [
+    { name: 'Example', component: Example },
     { name: 'Game', component: Game },
     { name: 'MyApp', component: MyApp, params: { names: ['ni', 'wo'] } },
     { name: 'Clock', component: Clock },

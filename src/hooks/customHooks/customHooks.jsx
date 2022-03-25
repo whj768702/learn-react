@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 // use开头
 function useWinSize() {
@@ -11,7 +11,7 @@ function useWinSize() {
     setSize({
       width: document.documentElement.clientWidth,
       height: document.documentElement.clientHeight,
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function useWinSize() {
 
     return () => {
       window.removeEventListener('resize', onResize);
-    }
+    };
   }, [onResize]);
 
   return size;

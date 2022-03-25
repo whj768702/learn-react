@@ -19,7 +19,7 @@ class Mouse extends React.Component {
     super(props);
     this.state = {
       x: 0,
-      y: 0
+      y: 0,
     };
     this.handleMouseMove = this.handleMouseMove.bind(this);
   }
@@ -27,7 +27,7 @@ class Mouse extends React.Component {
   handleMouseMove(event) {
     this.setState({
       x: event.clientX,
-      y: event.clientY
+      y: event.clientY,
     });
   }
 
@@ -45,9 +45,7 @@ class MouseTracker extends React.Component {
     return (
       <div>
         <h1>移动鼠标!</h1>
-        <Mouse render={mouse => (
-          <MoveMouse mouse={mouse}/>
-        )}/>
+        <Mouse render={(mouse) => <MoveMouse mouse={mouse} />} />
       </div>
     );
   }

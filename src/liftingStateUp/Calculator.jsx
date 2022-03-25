@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 const scaleNames = {
   c: "Celsius",
@@ -67,7 +67,7 @@ function Calculator(props) {
   const [{ temperature, scale }, setTemperature] = useState({ temperature: '', scale: 'c' });
 
   function handleCelsiusChange(temperature) {
-    setTemperature({ scale: 'c', temperature: temperature })
+    setTemperature({ scale: 'c', temperature: temperature });
   }
 
   function handleFahrenheitChange(temperature) {
@@ -75,7 +75,7 @@ function Calculator(props) {
   }
 
   const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
-  const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature
+  const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
 
   return (
     <div>
@@ -92,4 +92,4 @@ function Calculator(props) {
   );
 }
 
-export default Calculator
+export default Calculator;

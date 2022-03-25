@@ -22,7 +22,7 @@ const useSemiPersistentState = (key, initialState) => {
   }, [value, key]);
 
   return [value, setValue];
-}
+};
 
 const storiesReducer = (state, action) => {
   switch (action.type) {
@@ -31,7 +31,7 @@ const storiesReducer = (state, action) => {
         ...state,
         isLoading: true,
         isError: false
-      }
+      };
     }
     case 'STORIES_FETCH_SUCCES': {
       return {
@@ -39,37 +39,37 @@ const storiesReducer = (state, action) => {
         isLoading: false,
         isError: false,
         data: state.page === 0 ? action.payload.list : state.data.concat(action.payload.list),
-      }
+      };
     }
     case 'STORIES_FETCH_FAILURE': {
       return {
         ...state,
         isLoading: false,
         isError: true
-      }
+      };
     }
     case 'REMOVE_STORY': {
       return {
         ...state,
         data: state.data.filter(story => action.payload.objectID !== story.objectID)
-      }
+      };
     }
     case 'STORIES_PAGE': {
       return {
         ...state,
         page: action.payload.page
-      }
+      };
     }
     default: {
       throw new Error();
     }
   }
-}
+};
 
 const API_BASE = 'https://hn.algolia.com/api/v1';
 const API_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
-const PARAM_PAGE = 'page='
+const PARAM_PAGE = 'page=';
 // const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
 const getAsynstories = async (url) => {
@@ -79,7 +79,7 @@ const getAsynstories = async (url) => {
   } else {
     return null;
   }
-}
+};
 
 const getLastSearchs = urls => Array.from(new Set(urls)).slice(-6, -1);
 const getUrl = (searchTerm, page) => `${API_BASE}${API_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}`;
@@ -90,7 +90,7 @@ const LastSearches = ({ lastSearches, onLastSearch }) => (
       <button key={searchTerm + index} type='button' onClick={() => onLastSearch(searchTerm)}>{searchTerm}</button>
     ))}
   </>
-)
+);
 
 const Road2React = () => {
   console.log('B:Road2React');
@@ -118,7 +118,7 @@ const Road2React = () => {
         type: 'STORIES_FETCH_FAILURE'
       });
     }
-  }
+  };
 
   const handleFetchStories = useCallback(() => getStories(), [urls]);
 
@@ -145,14 +145,14 @@ const Road2React = () => {
   const handleLastSearch = (searchTerm) => {
     setSearchTerm(searchTerm);
     setUrls(urls.concat(searchTerm));
-  }
+  };
 
   const lastSearches = getLastSearchs(urls);
 
   const handleMore = () => {
     console.log('stories more: ', stories.page);
     dispatchStories({ type: 'STORIES_PAGE', payload: { page: stories.page + 1 } });
-  }
+  };
 
   return (
     <div>
@@ -165,7 +165,7 @@ const Road2React = () => {
         <button type='button' onClick={handleMore}>More</button>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default Road2React;

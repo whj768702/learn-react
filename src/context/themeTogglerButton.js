@@ -6,10 +6,7 @@ function ThemeTogglerButton() {
   return (
     <ThemeContext.Consumer>
       {(cxt) => (
-        <Button
-          onClick={cxt.toggleTheme}
-          style={{ backgroundColor: cxt.theme.background, color: cxt.theme.fontColor }}
-        >
+        <Button onClick={cxt.toggleTheme} style={{ backgroundColor: cxt.theme.background, color: cxt.theme.fontColor }}>
           Toggle Theme 点击
         </Button>
       )}

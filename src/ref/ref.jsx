@@ -28,7 +28,7 @@ class FormInput extends React.Component {
     this.textInput.current.select();
   }
 
-  render () {
+  render() {
     return (
       <div>
         <input type="text" ref={this.textInput} />
@@ -50,10 +50,12 @@ const RefComponent = (props) => {
 
   return (
     <div>
-      <button type="button" onClick={inputSelection}>Select Input</button>
+      <button type="button" onClick={inputSelection}>
+        Select Input
+      </button>
       <FormInput ref={formInput} />
     </div>
   );
-}
+};
 
 export default RefComponent;

@@ -10,13 +10,7 @@ function Square(props) {
 
 class Board extends React.Component {
   renderSquare(i, r, c) {
-    return (
-      <Square
-        key={(r, c)}
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i, r, c)}
-      />
-    );
+    return <Square key={(r, c)} value={this.props.squares[i]} onClick={() => this.props.onClick(i, r, c)} />;
   }
 
   renderRow(r) {

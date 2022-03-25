@@ -5,7 +5,7 @@ import Game from '../game/game';
 
 const { SubMenu } = Menu;
 
-function Sidebar () {
+function Sidebar() {
   const handleClick = e => {
     console.log('click: ', e);
   };

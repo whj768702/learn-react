@@ -1,9 +1,9 @@
 import React from 'react';
 
-const reverse = (PassedComponent) => ({children, ...props}) => 
+const reverse = (PassedComponent) => ({ children, ...props }) =>
   <PassedComponent {...props}>
     {children.split('').reverse().join('')}
-  </PassedComponent>
+  </PassedComponent>;
 
 function name(props) {
   return (
