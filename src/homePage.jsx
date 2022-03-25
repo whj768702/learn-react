@@ -56,7 +56,7 @@ function SideMenu() {
   }
 
   const routerArray = [
-    { name: 'Example', component: Example },
+    { name: 'ComponentsThroughProps', component: Example },
     { name: 'Game', component: Game },
     { name: 'MyApp', component: MyApp, params: { names: ['ni', 'wo'] } },
     { name: 'Clock', component: Clock },

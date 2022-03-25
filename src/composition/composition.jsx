@@ -21,11 +21,13 @@ function WelcomeDialog() {
 
 function SplitPane(props) {
   return (
-    <div>
-      <div className="left">
+    <div className='mt-8 flex'>
+      <div className="left w-40">
+        <span>左侧</span>
         {props.left}
       </div>
-      <div className="right">
+      <div className="right w-40">
+        <span>右侧</span>
         {props.right}
       </div>
     </div>
@@ -50,10 +52,12 @@ function Chat() {
 
 function Example() {
   return (
-    <SplitPane
-      left={<Contacts />}
-      right={<Chat />}
-    ></SplitPane>
+    <>
+      <h3>下面两个通过props传入组件</h3>
+      <SplitPane
+        left={<Contacts />}
+        right={<Chat />} />
+    </>
   );
 }
 
