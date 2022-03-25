@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
 import { Layout, Menu } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -167,7 +167,7 @@ function SideMenu() {
             minHeight: 'calc(100vh - 112px)',
           }}
         >
-          <Switch>
+          <Routes>
             {routerArray.map(route => {
               if (route.children) {
                 return route.children.map(childRoute => {
@@ -177,7 +177,7 @@ function SideMenu() {
                       strict
                       key={childRoute.name}
                       path={'/' + route.name + '/' + childRoute.name}
-                      render={() => <childRoute.component {...childRoute.params} />}
+                      element={<childRoute.component {...childRoute.params} />}
                     />
                   );
                 });
@@ -188,12 +188,12 @@ function SideMenu() {
                     strict
                     key={route.name}
                     path={'/' + route.name}
-                    render={() => <route.component {...route.params} />}
+                    element={<route.component {...route.params} />}
                   />
                 );
               }
             })}
-          </Switch>
+          </Routes>
         </Content>
       </Layout>
     </Layout >
