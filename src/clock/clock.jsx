@@ -24,9 +24,9 @@ class Clock extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='flex flex-col items-center'>
         <h1>class组件</h1>
-        <h2>it is {this.state.date.toLocaleString()}</h2>
+        <h4>it is {this.state.date.toLocaleString()}</h4>
       </div>
     );
   }

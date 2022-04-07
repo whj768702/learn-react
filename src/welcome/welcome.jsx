@@ -6,7 +6,12 @@ function Welcome(props) {
 
 function MyApp(props) {
   function renderWelcome(name, index) {
-    return <Welcome key={index} name={name} />;
+    return (
+      <>
+        <Welcome key={index} name={name} />;
+        <br />
+      </>
+    );
   }
 
   let target = [];

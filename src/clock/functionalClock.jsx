@@ -12,9 +12,9 @@ const FunctionalClock = () => {
   });
 
   return (
-    <div>
+    <div className='flex flex-col items-center'>
       <h1>函数式组件</h1>
-      <h2>it is {date.toLocaleString()}</h2>
+      <h4>it is {date.toLocaleString()}</h4>
     </div>
   );
 };
