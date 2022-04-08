@@ -50,13 +50,9 @@ const UseContextDemo = () => {
     }
   };
 
-  const border = {
-    border: '1px solid red',
-  };
-
   return (
     <div>
-      <div style={border}>
+      <div className='p-4 border-solid border-[1px] border-red-700'>
         <p>parent: clicked {count} times</p>
         <Button
           type="primary"
@@ -72,16 +68,16 @@ const UseContextDemo = () => {
         </CountContext.Provider>
       </div>
 
-      <div style={border}>
+      <div className='mt-8 p-4 border-solid border-[1px] border-red-700'>
         <ThemeContext.Provider value={theme}>
           <ThemedButton />
         </ThemeContext.Provider>
         <br />
-        <Button type="primary" onClick={() => changeTheme(theme)}>
+        <Button className='mt-2' type="primary" onClick={() => changeTheme(theme)}>
           change theme
         </Button>
       </div>
-    </div>
+    </div >
   );
 };
 
