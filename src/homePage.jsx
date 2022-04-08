@@ -175,10 +175,9 @@ function SideMenu() {
                 return route.children.map(childRoute => {
                   return (
                     <Route
-                      exact
                       strict
                       key={childRoute.name}
-                      path={'/' + route.name + '/' + childRoute.name}
+                      path={'/' + route.name + '/' + childRoute.name + '/*'}
                       element={<childRoute.component {...childRoute.params} />}
                     />
                   );

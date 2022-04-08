@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 import { Button } from 'antd';
 
 /**
@@ -70,18 +70,18 @@ const UseEffectDemo = () => {
       >
         click
       </Button>
-      <BrowserRouter>
-        <ul>
-          <li>
-            <Link to="/">index</Link>
-          </li>
-          <li>
-            <Link to="/list">list</Link>
-          </li>
-        </ul>
-        <Route path="/" exact component={Index}></Route>
-        <Route path="/list" component={List}></Route>
-      </BrowserRouter>
+      <ul>
+        <li>
+          <Link to="">index</Link>
+        </li>
+        <li>
+          <Link to="list">list</Link>
+        </li>
+      </ul>
+      <Routes>
+        <Route path="" exact element={<Index />}></Route>
+        <Route path="list" element={<List />}></Route>
+      </Routes>
     </div>
   );
 };
