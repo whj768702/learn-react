@@ -19,6 +19,18 @@ function Index() {
 
 function List() {
   useEffect(() => {
+    console.log('add mousemove event');
+    const onMouseMove = e => {
+      console.log(e);
+    };
+    window.addEventListener('mousemove', onMouseMove);
+    return () => {
+      console.log('mousemove event revmoved');
+      window.removeEventListener('mousemove', onMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
     console.log('list page in');
     return () => {
       console.log('list go');
@@ -47,18 +59,6 @@ const UseEffectDemo = () => {
       console.log('======回收函数执行了======');
     };
   }, [count]);
-
-  useEffect(() => {
-    console.log('add mousemove event');
-    const onMouseMove = e => {
-      console.log(e);
-    };
-    window.addEventListener('mousemove', onMouseMove);
-    return () => {
-      console.log('mousemove event revmoved');
-      window.removeEventListener('mousemove', onMouseMove);
-    };
-  }, []);
 
   return (
     <div>
