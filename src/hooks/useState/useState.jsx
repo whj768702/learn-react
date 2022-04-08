@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
 
-import './useState.scss';
-
 /**
  * 让函数式组件拥有状态管理特性，类似class组件中的this.state和this.setState
  * 需要特别注意，setXXX并不会像this.setState合并旧的状态，
@@ -44,38 +42,32 @@ const UseStateDemo = ({ title }) => {
 
   return (
     <div>
-      <div className="demo">
+      <div>
         <p>最简单的示例：</p>
         <span>clicked {count} times.</span>
-        <div>
-          <Button
-            size="small"
-            type="primary"
+        <div className='mt-2'>
+          <Button size="small" type="primary"
             onClick={() => {
               setCount(count + 1);
-            }}
-          >
+            }}>
             click
           </Button>
         </div>
       </div>
-      <div></div>
-      <div className="demo">
+      <div className='mt-8'>
         <span>对象更新示例：</span>
         <p>Count1: {count1}</p>
         <p>Count2: {count2}</p>
         <Button size="small" type="primary" onClick={() => setCount2({ count1: 10, count2: 20 })}>
           重置
         </Button>
-        <div className="button-group">
-          <Button
-            size="small"
+        <div className='mt-4 flex flex-wrap gap-2'>
+          <Button size="small"
             onClick={() =>
               setCount2((prevCount) => {
                 return { count1: prevCount.count1 + 10 };
               })
-            }
-          >
+            }>
             count1+10(会丢失count2)
           </Button>
           <Button
