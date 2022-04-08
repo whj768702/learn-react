@@ -2,6 +2,10 @@ import React, { useState, useCallback } from 'react';
 
 /**
  * useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
+ * useMemo返回缓存的值
+ * const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+ * useCallback返回缓存的函数
+ * const memoizedCallback = useCallback(() => { doSomething(a, b); }, [a, b]);
  * 官方文档说是和useMemo类似。示例还不是很明白。
  */
 
@@ -38,9 +42,7 @@ function ChildComponent({ name, children }) {
 
   // 解决不必要的渲染，优化性能
   // 第二个参数，name变化时，才重新渲染
-  const actionLisi = useCallback(() => {
-    return changeLisi(name);
-  }, [name]);
+  const actionLisi = useCallback(() => changeLisi(name), [name]);
 
   return (
     <>
