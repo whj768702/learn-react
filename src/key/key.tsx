@@ -1,6 +1,10 @@
 import React from 'react';
 
-class NumberListClass extends React.Component {
+type PropsType = {
+  numbers: number[];
+}
+
+class NumberListClass extends React.Component<PropsType> {
   render() {
     const numbers = this.props.numbers;
 
@@ -11,7 +15,7 @@ class NumberListClass extends React.Component {
   }
 }
 
-function NumberListFunction(props) {
+function NumberListFunction(props: PropsType) {
   const numbers = props.numbers;
   const listItems = numbers.map((number) => {
     return <li key={number.toString()}>{number}</li>;

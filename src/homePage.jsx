@@ -21,7 +21,7 @@ import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 import CustomHooks from './hooks/customHooks/customHooks';
 import UseCallbackDemo from './hooks/useCallback/useCallback';
 import UseLayoutEffectDemo from './hooks/useLayoutEffect/useLayoutEffectDemo';
-import { NumberListClass, NumberListFunction } from './key/key';
+import { NumberListClass, NumberListFunction } from './key/key.tsx';
 import Calculator from './liftingStateUp/Calculator';
 import { NameForm, NameFormFunction, FlavorFormFunction } from './form/form';
 import Road2React from './road2react/road2react';
