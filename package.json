@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^4.7.0",
-    "antd": "^4.19.5",
+    "@ant-design/icons": "^5.0.1",
+    "antd": "^5.2.1",
     "axios": "0.26.1",
     "lodash": "^4.17.21",
-    "sass": "^1.50.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
+    "sass": "^1.50.0",
     "swr": "^1.2.2"
   },
   "scripts": {
