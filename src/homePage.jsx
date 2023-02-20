@@ -26,6 +26,11 @@ import Calculator from './liftingStateUp/Calculator';
 import { NameForm, NameFormFunction, FlavorFormFunction } from './form/form';
 import Road2React from './road2react/road2react';
 import Example from './composition/composition';
+import InAction from './reactInAction/inAction.tsx';
+import Bookings from './reactInAction/bookings.tsx';
+import Bookables from './reactInAction/bookables.tsx';
+import Users from './reactInAction/users.tsx';
+
 
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
@@ -97,7 +102,14 @@ function SideMenu() {
         { name: 'flavorForm', component: FlavorFormFunction },
       ]
     },
-    { name: 'road2React', component: Road2React }
+    { name: 'road2React', component: Road2React },
+    {
+      name: 'inAction', component: InAction, children: [
+        { name: 'bookings', component: Bookings },
+        { name: 'bookables', component: Bookables },
+        { name: 'users', component: Users },
+      ]
+    }
   ];
 
   const MenuList = () => {
