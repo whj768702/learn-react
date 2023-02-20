@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import './useLayoutEffectDemo.scss';
 
 // useEffect runs asynchronously and after a render is painted to the screen.
 /**
@@ -18,7 +17,7 @@ const BlinkyRender1 = () => {
   }, [value]);
 
   return (
-    <div onClick={() => setValue(0)} className="demo">
+    <div onClick={() => setValue(0)} className="h-52">
       <span>useLayoutEffect</span>
       value: {value}
     </div>
