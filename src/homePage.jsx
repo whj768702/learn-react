@@ -8,14 +8,14 @@ import './index.css';
 
 import Game from './game/game';
 import MyApp from './welcome/welcome';
-import useStateDemo from './hooks/useState/useState';
+import useStateDemo from './hooks/useState/useState.tsx';
 import useMemoDemo from './hooks/useMemo/useMemo';
 import Clock from './clock/clock';
 import FunctionalClock from './clock/functionalClock';
 import ContextDemo from './context/contextDemo';
 import useRefDemo from './hooks/useRef/useRef';
 import ReducerDemo from './hooks/userReducer/useReducer';
-import useEffectDemo from './hooks/useEffect/useEffectDemo';
+import useEffectDemo from './hooks/useEffect/useEffectDemo.tsx';
 import UseContextDemo from './hooks/useContext/useContextDemo';
 import UseReducerDemo from './hooks/userReducer/useReducerDemo';
 import CustomHooks from './hooks/customHooks/customHooks';

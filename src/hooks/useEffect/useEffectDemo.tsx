@@ -79,7 +79,7 @@ const UseEffectDemo = () => {
         </li>
       </ul>
       <Routes>
-        <Route path="" exact element={<Index />}></Route>
+        <Route path="" element={<Index />}></Route>
         <Route path="list" element={<List />}></Route>
       </Routes>
     </div>
