@@ -5,21 +5,31 @@ import { useState } from 'react';
 
 const BookablesList = () => {
   const group = 'Rooms';
-  const bookablesInGroup = data.bookables.filter(b =>b.group===group);
-  const  [bookableIndex, setBookableIndex]= useState(1);
+  const bookablesInGroup = data.bookables.filter(b => b.group === group);
+  const [bookableIndex, setBookableIndex] = useState(1);
 
-  const changeBookable = selectedIndex =>  {
+  const changeBookable = selectedIndex => {
     setBookableIndex(selectedIndex);
     console.log(bookableIndex);
   }
+
+  const nextBookable = () => {
+    setBookableIndex(i => (i + 1) % bookablesInGroup.length);
+  }
+   
   return (
-    <ul>
-      {bookablesInGroup.map((b, i) => (
-        <li key={b.id} className={i===bookableIndex?'bg-red-600': undefined}>
-          <Button onClick={()=>changeBookable(i)}>{b.title}</Button>
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className='flex flex-col gap-y-1'>
+        {bookablesInGroup.map((b, i) => (
+          <span key={b.id} className={['w-fit', bookableIndex === i ? 'bg-red-600' : undefined].join(' ')} >
+            <Button onClick={() => changeBookable(i)}>{b.title}</Button>
+          </span>
+        ))}
+      </div>
+      <div className='mt-2'>
+        <Button onClick={nextBookable}>Next</Button>
+      </div>
+    </>
   );
 }
 
