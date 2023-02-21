@@ -57,7 +57,14 @@ const BookablesList = () => {
       {bookable && (
         <div className='w-1/2'>
           <h2>{bookable.title}</h2>
-          <span><Checkbox></Checkbox></span>
+          <span><Checkbox onChange={toggleDetails}>Show Details</Checkbox></span>
+          <p>{bookable.notes}</p>
+          {hasDetails && (
+            <div>
+              here is details
+              {/* details */}
+            </div>
+          )}
           <div>
             <ul>
               {bookable.days.sort().map(d => <li key={d}>{data.days[d]}</li>)}
