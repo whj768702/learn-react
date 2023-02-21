@@ -1,23 +1,30 @@
 import React from 'react';
 import data from './static';
-import { Select, Button } from 'antd';
-import { useState } from 'react';
+import { Select, Button, Checkbox } from 'antd';
+import { useReducer } from 'react';
+import reducer from './reducer';
 
 const BookablesList = () => {
-  const [group, setGroup] = useState('rooms');
-  const bookablesInGroup = data.bookables.filter(b => b.group === group);
-  const [bookableIndex, setBookableIndex] = useState(0);
+  const [state, dispatch] = useReducer(reducer, { group: 'Rooms', bookableIndex: 0, hasDetails: true, bookables: data.bookables })
+  const {group, bookableIndex, bookables, hasDetails} = state;
 
-  const changeBookable = selectedIndex => {
-    setBookableIndex(selectedIndex);
-    console.log(bookableIndex);
+  const bookablesInGroup = data.bookables.filter(b => b.group === group);
+
+  const bookable = bookablesInGroup[bookableIndex];
+
+  const changeBookable = (selectedIndex: number) => {
+    dispatch({type: 'SET_BOOKABLE', payload: selectedIndex});
   }
 
   const nextBookable = () => {
-    setBookableIndex(i => (i + 1) % bookablesInGroup.length);
+    dispatch({type: 'NEXT_BOOKABLE'});
   }
 
-  const getUniqueValues = (arr, key) => {
+  const toggleDetails = () => {
+    dispatch({type: 'TOGGLE_HAS_DETAILS'});
+  }
+
+  const getUniqueValues = (arr: any[], key: string) => {
     const propValues = arr.map(item => item[key]);
     const uniqueValues = new Set(propValues);
 
@@ -28,16 +35,14 @@ const BookablesList = () => {
 
   const groups = getUniqueValues(data.bookables, 'group').map(item => ({ label: item, value: item }));
 
-  const handleOnChange = (value) => {
-    setGroup(value);
+  const changeGroup = (value: string) => {
+    dispatch({type: 'SET_GROUP', payload: value});
   }
 
-  const bookable = bookablesInGroup[bookableIndex];
-  const [hasDetails, setHasDetails] = useState(false);
   return (
-    <div className='flex justify-around'>
-      <div>
-        <Select style={{ width: 120 }} onChange={handleOnChange} options={groups}></Select>
+    <div className='flex'>
+      <div className='w-1/2'>
+        <Select style={{ width: 120 }} onChange={changeGroup} options={groups}></Select>
         <div className='flex flex-col gap-y-1'>
           {bookablesInGroup.map((b, i) => (
             <span key={b.id} className={['w-fit', bookableIndex === i ? 'bg-red-600' : undefined].join(' ')} >
@@ -50,8 +55,9 @@ const BookablesList = () => {
         </div>
       </div>
       {bookable && (
-        <div>
-          <h3>{bookable.title}</h3>
+        <div className='w-1/2'>
+          <h2>{bookable.title}</h2>
+          <span><Checkbox></Checkbox></span>
           <div>
             <ul>
               {bookable.days.sort().map(d => <li key={d}>{data.days[d]}</li>)}

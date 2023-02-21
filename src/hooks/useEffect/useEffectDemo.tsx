@@ -20,7 +20,7 @@ function Index() {
 function List() {
   useEffect(() => {
     console.log('add mousemove event');
-    const onMouseMove = e => {
+    const onMouseMove = (e: any) => {
       console.log(e);
     };
     window.addEventListener('mousemove', onMouseMove);

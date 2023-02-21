@@ -8,7 +8,7 @@ import './index.css';
 
 import Game from './game/game';
 import MyApp from './welcome/welcome';
-import useStateDemo from './hooks/useState/useState.tsx';
+import useStateDemo from './hooks/useState/useState.jsx';
 import useMemoDemo from './hooks/useMemo/useMemo';
 import Clock from './clock/clock';
 import FunctionalClock from './clock/functionalClock';
