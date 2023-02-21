@@ -28,7 +28,7 @@ import Road2React from './road2react/road2react';
 import Example from './composition/composition';
 import InAction from './reactInAction/inAction.tsx';
 import Bookings from './reactInAction/bookings.tsx';
-import Bookables from './reactInAction/bookables.tsx';
+import BookablesList from './reactInAction/bookablesList.tsx';
 import Users from './reactInAction/users.tsx';
 
 
@@ -106,7 +106,7 @@ function SideMenu() {
     {
       name: 'inAction', component: InAction, children: [
         { name: 'bookings', component: Bookings },
-        { name: 'bookables', component: Bookables },
+        { name: 'bookables', component: BookablesList },
         { name: 'users', component: Users },
       ]
     }
