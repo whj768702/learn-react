@@ -17,7 +17,16 @@ const BookablesList = () => {
     setBookableIndex(i => (i + 1) % bookablesInGroup.length);
   }
 
-  const groups = [...new Set(data.bookables.map(b => b.group))].map(item=>({label:item, value:item}));
+  const getUniqueValues = (arr, key)=> {
+    const propValues = arr.map(item=>item[key]);
+    const uniqueValues = new Set(propValues);
+
+    const uniqueValuesArr = [...uniqueValues];
+
+    return uniqueValuesArr;
+  }
+
+  const groups = getUniqueValues(data.bookables, 'group').map(item=>({label:item, value:item}));
 
   const handleOnChange = (value)=> {
     setGroup(value);
