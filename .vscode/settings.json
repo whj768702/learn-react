@@ -7,5 +7,6 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "editor.formatOnPaste": true
+  "editor.formatOnPaste": true,
+  "biome.enabled": true
 }
