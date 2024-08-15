@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { Layout, Menu } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-
-import './index.css';
 
 import Game from './game/game';
 import MyApp from './welcome/welcome';
@@ -31,11 +29,11 @@ import Bookings from './reactInAction/bookings.tsx';
 import BookablesList from './reactInAction/bookablesList.tsx';
 import Users from './reactInAction/users.tsx';
 
-
 const { Header, Sider, Content } = Layout;
 const { Item, SubMenu } = Menu;
 
 function SideMenu() {
+  const navigate = useNavigate();
   const [collapsed, toggle] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState([]);
   const [selectedSubMenu, setSelectedSubMenu] = useState([]);
@@ -58,86 +56,66 @@ function SideMenu() {
     console.log('key: ', key, keyPath);
     setSelectedMenu([key]);
     setSelectedSubMenu(keyPath);
+    navigate('/' + keyPath.reverse().join('/'));
   }
 
-  const routerArray = [
-    { name: 'ComponentsThroughProps', component: Example },
-    { name: 'Game', component: Game },
-    { name: 'MyApp', component: MyApp, params: { names: ['ni', 'wo'] } },
-    { name: 'Clock', component: Clock },
-    { name: 'FunctionalClock', component: FunctionalClock },
-    { name: 'Context', component: ContextDemo },
+  const items = [
+    { key: 'ComponentsThroughProps', label: 'ComponentsThroughProps' },
+    { key: 'Game', label: 'Game' },
+    { key: 'MyApp', label: 'MyApp' },
+    { key: 'Clock', label: 'Clock' },
+    { key: 'FunctionalClock', label: 'FunctionalClock' },
+    { key: 'Context', label: 'Context' },
     {
-      name: 'hooks',
-      component: 'hooks',
+      key: 'hooks',
+      label: 'hooks',
       children: [
-        { name: 'useState', component: useStateDemo },
-        { name: 'useMemo', component: useMemoDemo },
-        { name: 'useRef', component: useRefDemo },
-        { name: 'useReducer1', component: ReducerDemo },
-        { name: 'useEffect', component: useEffectDemo },
-        { name: 'useContext', component: UseContextDemo },
-        { name: 'useReducer2', component: UseReducerDemo },
-        { name: 'customHooks', component: CustomHooks },
-        { name: 'useCallback', component: UseCallbackDemo },
-        { name: 'useLayoutEffect', component: UseLayoutEffectDemo },
+        { key: 'useState', label: 'useState' },
+        { key: 'useMemo', label: 'useMemo' },
+        { key: 'useRef', label: 'useRef' },
+        { key: 'useReducer1', label: 'useReducer1' },
+        { key: 'useEffect', label: 'useEffect' },
+        { key: 'useContext', label: 'useContext' },
+        { key: 'useReducer2', label: 'useReducer2' },
+        { key: 'customHooks', label: 'customHooks' },
+        { key: 'useCallback', label: 'useCallback' },
+        { key: 'useLayoutEffect', label: 'useLayoutEffect' },
       ],
     },
     {
-      name: 'key',
+      key: 'key',
+      label: 'key',
       children: [
-        { name: 'class', component: NumberListClass, params: { numbers: [1, 2, 3] } },
-        { name: 'functional', component: NumberListFunction, params: { numbers: [1, 2, 3] } },
+        { key: 'class', label: 'class' },
+        { key: 'functional', label: 'functional' },
       ],
     },
     {
-      name: 'Calculator',
-      component: Calculator
+      key: 'Calculator',
+      label: 'Calculator',
     },
     {
-      name: 'form',
+      key: 'form',
+      label: 'form',
       children: [
-        { name: 'nameForm', component: NameForm },
-        { name: 'nameFormFunction', component: NameFormFunction },
-        { name: 'flavorForm', component: FlavorFormFunction },
+        { key: 'nameForm', label: 'nameForm' },
+        { key: 'nameFormFunction', label: 'nameFormFunction' },
+        { key: 'flavorForm', label: 'flavorForm' },
       ]
     },
-    { name: 'road2React', component: Road2React },
+    { key: 'road2React', label: 'road2React' },
     {
-      name: 'inAction', component: InAction, children: [
-        { name: 'bookings', component: Bookings },
-        { name: 'bookables', component: BookablesList },
-        { name: 'users', component: Users },
+      key: 'inAction',
+      label: 'inAction',
+      children: [
+        { key: 'bookings', label: 'bookings' },
+        { key: 'bookables', label: 'bookables' },
+        { key: 'users', label: 'users' },
       ]
     }
   ];
 
   const MenuList = () => {
-    const GenerateMenu = (routerArray) => {
-      return routerArray.map((item, index) => {
-        if (item.children) {
-          return (
-            <SubMenu key={item.name} title={<span>{item.name}</span>}>
-              {item.children.map((child) => {
-                return (
-                  <Item key={child.name}>
-                    <span>{child.name}</span>
-                    <Link to={'/' + item.name + '/' + child.name} />
-                  </Item>
-                );
-              })}
-            </SubMenu>
-          );
-        } else {
-          return (
-            <Item key={item.name}>
-              <span>{item.name}</span>
-              <Link to={'/' + item.name} />
-            </Item>
-          );
-        }
-      });
-    };
     return (
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Menu
@@ -147,8 +125,8 @@ function SideMenu() {
           defaultOpenKeys={selectedSubMenu}
           selectedKeys={selectedMenu}
           onClick={menuClick}
+          items={items}
         >
-          {GenerateMenu(routerArray)}
         </Menu>
       </Sider>
     );
@@ -181,39 +159,14 @@ function SideMenu() {
             minHeight: 'calc(100vh - 112px)',
           }}
         >
-          <Routes>
-            {routerArray.map(route => {
-              if (route.children) {
-                return route.children.map(childRoute => {
-                  return (
-                    <Route
-                      strict
-                      key={childRoute.name}
-                      path={'/' + route.name + '/' + childRoute.name + '/*'}
-                      element={<childRoute.component {...childRoute.params} />}
-                    />
-                  );
-                });
-              } else {
-                return (
-                  <Route
-                    exact
-                    strict
-                    key={route.name}
-                    path={'/' + route.name}
-                    element={<route.component {...route.params} />}
-                  />
-                );
-              }
-            })}
-          </Routes>
+          <Outlet></Outlet>
         </Content>
       </Layout>
     </Layout >
   );
 }
 function Homepage() {
-  return <BrowserRouter>{SideMenu()}</BrowserRouter>;
+  return <div>{SideMenu()}</div>;
 }
 
 export default Homepage;

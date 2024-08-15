@@ -7,7 +7,7 @@ import { Button } from 'antd';
  * 缓存函数返回值
  */
 
-function useMemoDemo() {
+function UseMemoDemo() {
   const [lisi, setLisi] = useState('李四等待中');
   const [wangwu, setWangwu] = useState('王五等待中');
 
@@ -50,4 +50,4 @@ function ChildComponent({ name, children }) {
   );
 }
 
-export default useMemoDemo;
+export default UseMemoDemo;

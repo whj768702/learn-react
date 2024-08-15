@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import { Button, Input } from 'antd';
 
-function useRefDemo() {
+function UseRefDemo() {
   const inputEl = useRef(null);
   const onButtonClick = () => {
     inputEl.current.value = 'hello world!';
@@ -33,4 +33,4 @@ function useRefDemo() {
   );
 }
 
-export default useRefDemo;
+export default UseRefDemo;
