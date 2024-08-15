@@ -32,7 +32,7 @@ function ThemedButton() {
 
 const CountContext = createContext(0);
 function ShowCount() {
-  let count = useContext(CountContext);
+  const count = useContext(CountContext);
   return <h2>child: value from parent: {count}</h2>;
 }
 

@@ -1,9 +1,6 @@
 import React from 'react';
 
 class MoveMouse extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const mouse = this.props.mouse;
     return (

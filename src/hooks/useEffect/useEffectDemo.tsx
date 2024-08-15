@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button } from "antd";
+import React, { useEffect, useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 
 /**
  * 每次render或者re-render都会执行useEffect
@@ -8,9 +8,9 @@ import { Button } from 'antd';
 
 function Index() {
   useEffect(() => {
-    console.log('index come');
+    console.log("index come");
     return () => {
-      console.log('index go');
+      console.log("index go");
     };
   }, []);
 
@@ -19,21 +19,21 @@ function Index() {
 
 function List() {
   useEffect(() => {
-    console.log('add mousemove event');
-    const onMouseMove = (e: any) => {
+    console.log("add mousemove event");
+    const onMouseMove = (e: MouseEvent) => {
       console.log(e);
     };
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener("mousemove", onMouseMove);
     return () => {
-      console.log('mousemove event revmoved');
-      window.removeEventListener('mousemove', onMouseMove);
+      console.log("mousemove event revmoved");
+      window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 
   useEffect(() => {
-    console.log('list page in');
+    console.log("list page in");
     return () => {
-      console.log('list go');
+      console.log("list go");
     };
   }, []);
 
@@ -56,7 +56,7 @@ const UseEffectDemo = () => {
   useEffect(() => {
     console.log(`useEffect => you clicked ${count} times`);
     return () => {
-      console.log('======回收函数执行了======');
+      console.log("======回收函数执行了======");
     };
   }, [count]);
 
@@ -79,8 +79,8 @@ const UseEffectDemo = () => {
         </li>
       </ul>
       <Routes>
-        <Route path="" element={<Index />}></Route>
-        <Route path="list" element={<List />}></Route>
+        <Route path="" element={<Index />} />
+        <Route path="list" element={<List />} />
       </Routes>
     </div>
   );

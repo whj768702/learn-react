@@ -2,7 +2,7 @@ import React from 'react';
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button type='button' className="square" onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -93,7 +93,7 @@ class Game extends React.Component {
       }
       return (
         <li key={index} className={active}>
-          <button onClick={() => this.jumpTo(index)}>{desc}</button>
+          <button type='button' onClick={() => this.jumpTo(index)}>{desc}</button>
         </li>
       );
     });

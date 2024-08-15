@@ -21,7 +21,7 @@ function Sidebar() {
         key='sub1'
         title={
           <span>
-            <Icon type='mail'></Icon>
+            <Icon type='mail' />
             <span>Navigation One</span>
           </span>
         }

@@ -3,8 +3,8 @@ import { ThemeContext } from './themeContext';
 
 class ThemedButton extends React.Component {
   render() {
-    let props = this.props;
-    let theme = this.context;
+    const props = this.props;
+    const theme = this.context;
 
     return (
       <button {...props} style={{ backgroundColor: theme.backgroundColor }}>

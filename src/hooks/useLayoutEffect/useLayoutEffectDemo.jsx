@@ -17,7 +17,7 @@ const BlinkyRender1 = () => {
   }, [value]);
 
   return (
-    <div onClick={() => setValue(0)} className="h-52">
+    <div onKeyDown={() => setValue(0)} onClick={() => setValue(0)} className="h-52">
       <span>useLayoutEffect</span>
       value: {value}
     </div>
@@ -41,7 +41,7 @@ const BlinkyRender2 = () => {
   }, [value]);
 
   return (
-    <div onClick={() => setValue(0)} className="demo">
+    <div onKeyDown={() => setValue(0)} onClick={() => setValue(0)} className="demo">
       <span>useEffect</span>
       value: {value}
     </div>

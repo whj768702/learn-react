@@ -5,9 +5,8 @@ import '../road2react.css';
 const SortArrow = ({ sort, currentKey }) => {
   if (sort.sortKey === currentKey) {
     return (<span>{sort.isReverse ? '升' : '降'}</span>);
-  } else {
-    return (<></>);
   }
+    return (<></>);
 };
 
 const ColumnHeader = ({ sort, onSort }) => {

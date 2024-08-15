@@ -76,9 +76,8 @@ const getAsynstories = async (url) => {
   const response = await axios.get(url);
   if (response.status === 200) {
     return response.data;
-  } else {
-    return null;
   }
+    return null;
 };
 
 const getLastSearchs = urls => Array.from(new Set(urls)).slice(-6, -1);

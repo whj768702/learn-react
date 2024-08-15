@@ -35,7 +35,7 @@ function UseMemoDemo() {
 function ChildComponent({ name, children }) {
   function changeLisi(name) {
     console.log('李四来了');
-    return name + '李四来了！！！';
+    return `${name}李四来了！！！`;
   }
 
   // 解决不必要的渲染，优化性能

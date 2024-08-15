@@ -6,7 +6,7 @@ const FunctionalClock = () => {
 
   useEffect(() => {
     const timerID = setInterval(() => setDate(new Date()), 1000);
-    return function () {
+    return () => {
       clearInterval(timerID);
     };
   });

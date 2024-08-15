@@ -18,12 +18,13 @@ export default function reducer(state: State, action: Action) {
         ...state,
         hasDetails: !state.hasDetails
       }
-    case 'NEXT_BOOKABLE':
+    case 'NEXT_BOOKABLE': {
       const count = state.bookables.filter((b: BookableItem) => b.group === state.group).length;
       return {
         ...state,
         bookableIndex: (state.bookableIndex + 1) % count
       }
+    }
     default:
       return state;
   }

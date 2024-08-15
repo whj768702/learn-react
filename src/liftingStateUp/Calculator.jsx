@@ -12,7 +12,7 @@ function toFahrenheit(celsius) {
   return (celsius * 9 / 5) + 32;
 }
 function tryConvert(temperature, convert) {
-  const input = parseFloat(temperature);
+  const input = Number.parseFloat(temperature);
 
   if (Number.isNaN(input)) {
     return '';
@@ -87,7 +87,7 @@ function Calculator(props) {
         scale="f"
         temperature={fahrenheit}
         onTemperatureChange={handleFahrenheitChange} />
-      <BoilingVerdict celsius={parseFloat(celsius)} />
+      <BoilingVerdict celsius={Number.parseFloat(celsius)} />
     </div>
   );
 }

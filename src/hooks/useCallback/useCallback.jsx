@@ -15,14 +15,14 @@ const UseCallbackDemo = () => {
 
   return (
     <>
-      <button
+      <button type='button'
         onClick={() => {
           setLisi(new Date().getTime());
         }}
       >
         李四
       </button>
-      <button
+      <button type='button'
         onClick={() => {
           setWangwu(new Date().getTime());
         }}
@@ -37,7 +37,7 @@ const UseCallbackDemo = () => {
 function ChildComponent({ name, children }) {
   function changeLisi(name) {
     console.log('李四来了', name);
-    return name + '李四来了！！！';
+    return `${name}李四来了！！！`;
   }
 
   // 解决不必要的渲染，优化性能

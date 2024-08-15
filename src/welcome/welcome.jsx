@@ -14,7 +14,7 @@ function MyApp(props) {
     );
   }
 
-  let target = [];
+  const target = [];
   for (let i = 0; i < props.names.length; i++) {
     target.push(renderWelcome(props.names[i], i));
   }
