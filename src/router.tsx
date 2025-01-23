@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router";
 import Homepage from "./HomePage";
 import Clock from "./clock/clock";
 import FunctionalClock from "./clock/functionalClock";
@@ -25,140 +25,146 @@ import Users from "./reactInAction/users";
 import Road2React from "./road2react/road2react";
 import MyApp from "./welcome/welcome";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Homepage />,
+      children: [
+        {
+          path: "/ComponentsThroughProps",
+          element: <Example />,
+        },
+        {
+          path: "/Game",
+          element: <Game />,
+        },
+        {
+          path: "/MyApp",
+          element: <MyApp names={["ni", "wo"]} />,
+        },
+        {
+          path: "/Clock",
+          element: <Clock />,
+        },
+        {
+          path: "/FunctionalClock",
+          element: <FunctionalClock />,
+        },
+        {
+          path: "/Context",
+          element: <ContextDemo />,
+        },
+        {
+          path: "/hooks",
+          children: [
+            {
+              path: "/hooks/useState",
+              element: <UseStateDemo title={"useState"} />,
+            },
+            {
+              path: "/hooks/useMemo",
+              element: <UseMemoDemo />,
+            },
+            {
+              path: "/hooks/useRef",
+              element: <UseRefDemo />,
+            },
+            {
+              path: "/hooks/useReducer1",
+              element: <ReducerDemo />,
+            },
+            {
+              path: "/hooks/useEffect",
+              element: <UseEffectDemo />,
+            },
+            {
+              path: "/hooks/useContext",
+              element: <UseContextDemo />,
+            },
+            {
+              path: "/hooks/useReducer2",
+              element: <UseReducerDemo />,
+            },
+            {
+              path: "/hooks/customHooks",
+              element: <CustomHooks />,
+            },
+            {
+              path: "/hooks/useCallback",
+              element: <UseCallbackDemo />,
+            },
+            {
+              path: "/hooks/useLayoutEffect",
+              element: <UseLayoutEffectDemo />,
+            },
+          ],
+        },
+        {
+          path: "/key",
+          children: [
+            {
+              path: "/key/class",
+              element: <NumberListClass numbers={[1, 2, 3]} />,
+            },
+            {
+              path: "/key/functional",
+              element: <NumberListFunction numbers={[1, 2, 3]} />,
+            },
+          ],
+        },
+        {
+          path: "/Calculator",
+          element: <Calculator />,
+        },
+        {
+          path: "/form",
+          children: [
+            {
+              path: "/form/nameForm",
+              element: <NameForm />,
+            },
+            {
+              path: "/form/nameFormFunction",
+              element: <NameFormFunction />,
+            },
+            {
+              path: "/form/flavorForm",
+              element: <FlavorFormFunction />,
+            },
+          ],
+        },
+        {
+          path: "/road2React",
+          element: <Road2React />,
+        },
+        {
+          path: "/inAction",
+          element: <InAction />,
+          children: [
+            {
+              path: "/inAction/bookings",
+              element: <Bookings />,
+            },
+            {
+              path: "/inAction/bookables",
+              element: <BookablesList />,
+            },
+            {
+              path: "/inAction/users",
+              element: <Users />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Homepage />,
-    children: [
-      {
-        path: "/ComponentsThroughProps",
-        element: <Example />,
-      },
-      {
-        path: "/Game",
-        element: <Game />,
-      },
-      {
-        path: "/MyApp",
-        element: <MyApp names={["ni", "wo"]} />,
-      },
-      {
-        path: "/Clock",
-        element: <Clock />,
-      },
-      {
-        path: "/FunctionalClock",
-        element: <FunctionalClock />,
-      },
-      {
-        path: "/Context",
-        element: <ContextDemo />,
-      },
-      {
-        path: "/hooks",
-        children: [
-          {
-            path: "/hooks/useState",
-            element: <UseStateDemo title={"useState"} />,
-          },
-          {
-            path: "/hooks/useMemo",
-            element: <UseMemoDemo />,
-          },
-          {
-            path: "/hooks/useRef",
-            element: <UseRefDemo />,
-          },
-          {
-            path: "/hooks/useReducer1",
-            element: <ReducerDemo />,
-          },
-          {
-            path: "/hooks/useEffect",
-            element: <UseEffectDemo />,
-          },
-          {
-            path: "/hooks/useContext",
-            element: <UseContextDemo />,
-          },
-          {
-            path: "/hooks/useReducer2",
-            element: <UseReducerDemo />,
-          },
-          {
-            path: "/hooks/customHooks",
-            element: <CustomHooks />,
-          },
-          {
-            path: "/hooks/useCallback",
-            element: <UseCallbackDemo />,
-          },
-          {
-            path: "/hooks/useLayoutEffect",
-            element: <UseLayoutEffectDemo />,
-          },
-        ],
-      },
-      {
-        path: "/key",
-        children: [
-          {
-            path: "/key/class",
-            element: <NumberListClass numbers={[1, 2, 3]} />,
-          },
-          {
-            path: "/key/functional",
-            element: (
-              <NumberListFunction numbers={[1, 2, 3]} />
-            ),
-          },
-        ],
-      },
-      {
-        path: "/Calculator",
-        element: <Calculator />,
-      },
-      {
-        path: "/form",
-        children: [
-          {
-            path: "/form/nameForm",
-            element: <NameForm />,
-          },
-          {
-            path: "/form/nameFormFunction",
-            element: <NameFormFunction />,
-          },
-          {
-            path: "/form/flavorForm",
-            element: <FlavorFormFunction />,
-          },
-        ],
-      },
-      {
-        path: "/road2React",
-        element: <Road2React />,
-      },
-      {
-        path: "/inAction",
-        element: <InAction />,
-        children: [
-          {
-            path: "/inAction/bookings",
-            element: <Bookings />,
-          },
-          {
-            path: "/inAction/bookables",
-            element: <BookablesList />,
-          },
-          {
-            path: "/inAction/users",
-            element: <Users />,
-          },
-        ],
-      },
-    ],
+    future: {
+      v7_relativeSplatPath: true,
+      v7_fetcherPersist: true,
+    },
   },
-]);
+);
 
 export default router;
