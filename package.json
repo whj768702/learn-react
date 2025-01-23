@@ -23,11 +23,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -35,8 +31,8 @@
     ]
   },
   "devDependencies": {
-    "@rsbuild/core": "^1.0.1-beta.13",
-    "@rsbuild/plugin-react": "^1.0.1-beta.13",
+    "@rsbuild/core": "^1.2.1",
+    "@rsbuild/plugin-react": "^1.1.0",
     "@types/node": "^22.10.8",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
