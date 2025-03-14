@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Welcome(props) {
   return <span>hello, {props.name}</span>;
 }
