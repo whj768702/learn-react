@@ -6,7 +6,7 @@ function MyApp(props) {
   function renderWelcome(name, index) {
     return (
       <>
-        <Welcome key={index} name={name} />;
+        <Welcome key={index} name={name} />
         <br />
       </>
     );
