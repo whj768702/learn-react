@@ -1,7 +1,6 @@
-import React from 'react';
-import Buttons from './button';
-import ShowArea from './showArea';
-import { Color } from './color';
+import Buttons from "./button";
+import { Color } from "./color";
+import ShowArea from "./showArea";
 
 function ReducerDemo() {
   return (

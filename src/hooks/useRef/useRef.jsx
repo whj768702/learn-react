@@ -1,24 +1,25 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import { Button, Input } from 'antd';
+import { Button, Input } from "antd";
 
 function UseRefDemo() {
   const inputEl = useRef(null);
   const onButtonClick = () => {
-    inputEl.current.value = 'hello world!';
+    inputEl.current.value = "hello world!";
     console.log(inputEl);
   };
 
-  const [text, setText] = useState('ce shi');
+  const [text, setText] = useState("ce shi");
   const textRef = useRef(null);
 
   useEffect(() => {
     textRef.current = text;
-    console.log('terxtRef.current: ', textRef.current);
+    console.log("textRef.current: ", textRef.current);
   });
   return (
     <>
-      <input type="text" ref={inputEl} /> {/* ant的input不好使，还不知道为啥。原生input好用。*/}
+      <input type="text" ref={inputEl} />{" "}
+      {/* ant的input不好使，还不知道为啥。原生input好用。*/}
       <Button onClick={onButtonClick}>在input上展示文字</Button>
       <br />
       <br />

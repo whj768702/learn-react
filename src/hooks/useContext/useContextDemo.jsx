@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
-// import ShowContent from '../../ShowContent/ShowContent';
-import { Button } from 'antd';
+import { Button } from "antd";
+import { createContext, useContext, useState } from "react";
 
 /**
  * accepts a context object(the value returned from React.createContext) and
@@ -10,12 +9,12 @@ import { Button } from 'antd';
 // object
 const themes = {
   light: {
-    foreground: '#000000',
-    background: '#eeeeee',
+    foreground: "#000000",
+    background: "#eeeeee",
   },
   dark: {
-    foreground: '#ffffff',
-    background: '#222222',
+    foreground: "#ffffff",
+    background: "#222222",
   },
 };
 const ThemeContext = createContext(themes.light);
@@ -42,8 +41,8 @@ const UseContextDemo = () => {
 
   const [theme, setTheme] = useState(themes.light);
   const changeTheme = (prev) => {
-    console.log('theme: ', prev);
-    if (prev.background === '#eeeeee') {
+    console.log("theme: ", prev);
+    if (prev.background === "#eeeeee") {
       setTheme(themes.dark);
     } else {
       setTheme(themes.light);
@@ -52,7 +51,7 @@ const UseContextDemo = () => {
 
   return (
     <div>
-      <div className='p-4 border-solid border-[1px] border-red-700'>
+      <div className="p-4 border-solid border-[1px] border-red-700">
         <p>parent: clicked {count} times</p>
         <Button
           type="primary"
@@ -68,16 +67,20 @@ const UseContextDemo = () => {
         </CountContext.Provider>
       </div>
 
-      <div className='mt-8 p-4 border-solid border-[1px] border-red-700'>
+      <div className="mt-8 p-4 border-solid border-[1px] border-red-700">
         <ThemeContext.Provider value={theme}>
           <ThemedButton />
         </ThemeContext.Provider>
         <br />
-        <Button className='mt-2' type="primary" onClick={() => changeTheme(theme)}>
+        <Button
+          className="mt-2"
+          type="primary"
+          onClick={() => changeTheme(theme)}
+        >
           change theme
         </Button>
       </div>
-    </div >
+    </div>
   );
 };
 

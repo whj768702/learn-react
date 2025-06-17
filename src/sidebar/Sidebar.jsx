@@ -1,7 +1,5 @@
 import { Icon, Menu } from "antd";
-import React from "react";
-import { Link, Route, BrowserRouter as Router } from "react-router";
-import Game from "../game/game";
+import { Link } from "react-router";
 
 const { SubMenu } = Menu;
 

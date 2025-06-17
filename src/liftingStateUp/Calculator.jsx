@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const scaleNames = {
   c: "Celsius",
-  f: "Fahrenheit"
+  f: "Fahrenheit",
 };
 
 function toCelsius(fahrenheit) {
-  return (fahrenheit - 32) * 5 / 9;
+  return ((fahrenheit - 32) * 5) / 9;
 }
 function toFahrenheit(celsius) {
-  return (celsius * 9 / 5) + 32;
+  return (celsius * 9) / 5 + 32;
 }
 function tryConvert(temperature, convert) {
   const input = Number.parseFloat(temperature);
 
   if (Number.isNaN(input)) {
-    return '';
+    return "";
   }
   const output = convert(input);
   const rounded = Math.round(output * 1000) / 1000;
@@ -45,7 +45,7 @@ function TemperatureInput(props) {
   );
 }
 // class TemperatureInput extends React.Component{
-//   constructor(props){ 
+//   constructor(props){
 //     super(props);
 //   }
 //   handleChange = (e) => {
@@ -64,29 +64,36 @@ function TemperatureInput(props) {
 // }
 
 function Calculator(props) {
-  const [{ temperature, scale }, setTemperature] = useState({ temperature: '', scale: 'c' });
+  const [{ temperature, scale }, setTemperature] = useState({
+    temperature: "",
+    scale: "c",
+  });
 
   function handleCelsiusChange(temperature) {
-    setTemperature({ scale: 'c', temperature: temperature });
+    setTemperature({ scale: "c", temperature: temperature });
   }
 
   function handleFahrenheitChange(temperature) {
-    setTemperature({ scale: 'f', temperature: temperature });
+    setTemperature({ scale: "f", temperature: temperature });
   }
 
-  const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
-  const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+  const celsius =
+    scale === "f" ? tryConvert(temperature, toCelsius) : temperature;
+  const fahrenheit =
+    scale === "c" ? tryConvert(temperature, toFahrenheit) : temperature;
 
   return (
     <div>
       <TemperatureInput
         scale="c"
         temperature={celsius}
-        onTemperatureChange={handleCelsiusChange} />
+        onTemperatureChange={handleCelsiusChange}
+      />
       <TemperatureInput
         scale="f"
         temperature={fahrenheit}
-        onTemperatureChange={handleFahrenheitChange} />
+        onTemperatureChange={handleFahrenheitChange}
+      />
       <BoilingVerdict celsius={Number.parseFloat(celsius)} />
     </div>
   );

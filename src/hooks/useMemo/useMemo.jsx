@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Button } from 'antd';
+import { Button } from "antd";
+import { useMemo, useState } from "react";
 
 /**
  * 组件内有些方法，只想在其参数更改时运行它们，而不是每次组件更新都运行。
@@ -8,8 +8,8 @@ import { Button } from 'antd';
  */
 
 function UseMemoDemo() {
-  const [lisi, setLisi] = useState('李四等待中');
-  const [wangwu, setWangwu] = useState('王五等待中');
+  const [lisi, setLisi] = useState("李四等待中");
+  const [wangwu, setWangwu] = useState("王五等待中");
 
   return (
     <>
@@ -34,7 +34,7 @@ function UseMemoDemo() {
 
 function ChildComponent({ name, children }) {
   function changeLisi(name) {
-    console.log('李四来了');
+    console.log("李四来了");
     return `${name}李四来了！！！`;
   }
 

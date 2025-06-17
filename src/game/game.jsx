@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 // Square组件保持不变
 function Square(props) {
   return (
-    <button type='button' className="square" onClick={props.onClick}>
+    <button type="button" className="square" onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -12,7 +12,13 @@ function Square(props) {
 // Board转换为函数组件
 function Board({ squares, onClick }) {
   const renderSquare = (i, r, c) => {
-    return <Square key={`${r}-${c}`} value={squares[i]} onClick={() => onClick(i, r, c)} />;
+    return (
+      <Square
+        key={`${r}-${c}`}
+        value={squares[i]}
+        onClick={() => onClick(i, r, c)}
+      />
+    );
   };
 
   const renderRow = (r) => {
@@ -42,7 +48,7 @@ function Game() {
       squares: Array(9).fill(null),
       x: undefined,
       y: undefined,
-    }
+    },
   ]);
   const [stepNumber, setStepNumber] = React.useState(0);
   const [xIsNext, setXIsNext] = React.useState(true);
@@ -54,7 +60,7 @@ function Game() {
 
     if (calculateWinner(squares) || squares[i]) return;
 
-    squares[i] = xIsNext ? 'X' : 'O';
+    squares[i] = xIsNext ? "X" : "O";
     setHistory(newHistory.concat([{ squares, x, y }]));
     setStepNumber(newHistory.length);
     setXIsNext(!xIsNext);
@@ -70,11 +76,14 @@ function Game() {
 
   // 状态显示逻辑保持不变
   const moves = history.map((step, move) => {
-    const desc = move ? `Go to move #${move} (${step.x} : ${step.y})` : 'Go to game start';
+    const desc = move
+      ? `Go to move #${move} (${step.x} : ${step.y})`
+      : "Go to game start";
     return (
       <li key={move}>
         <button
-          className={move === stepNumber ? 'active' : ''}
+          type="button"
+          className={move === stepNumber ? "active" : ""}
           onClick={() => jumpTo(move)}
         >
           {desc}
@@ -87,9 +96,9 @@ function Game() {
   if (winner) {
     status = `Winner: ${winner}`;
   } else if (stepNumber === 9) {
-    status = 'No one wins';
+    status = "No one wins";
   } else {
-    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+    status = `Next player: ${xIsNext ? "X" : "O"}`;
   }
 
   return (

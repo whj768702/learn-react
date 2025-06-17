@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { ColorContext } from './color';
+import { useContext } from "react";
+import { ColorContext } from "./color";
 
 function ShowArea() {
   // 使用共享的状态

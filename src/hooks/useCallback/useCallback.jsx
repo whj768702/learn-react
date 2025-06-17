@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useCallback, useState } from "react";
 
 /**
  * useCallback(fn, deps) is equivalent to useMemo(() => fn, deps).
@@ -10,19 +10,21 @@ import React, { useState, useCallback } from 'react';
  */
 
 const UseCallbackDemo = () => {
-  const [lisi, setLisi] = useState('李四等待中');
-  const [wangwu, setWangwu] = useState('王五等待中');
+  const [lisi, setLisi] = useState("李四等待中");
+  const [wangwu, setWangwu] = useState("王五等待中");
 
   return (
     <>
-      <button type='button'
+      <button
+        type="button"
         onClick={() => {
           setLisi(new Date().getTime());
         }}
       >
         李四
       </button>
-      <button type='button'
+      <button
+        type="button"
         onClick={() => {
           setWangwu(new Date().getTime());
         }}
@@ -36,7 +38,7 @@ const UseCallbackDemo = () => {
 
 function ChildComponent({ name, children }) {
   function changeLisi(name) {
-    console.log('李四来了', name);
+    console.log("李四来了", name);
     return `${name}李四来了！！！`;
   }
 

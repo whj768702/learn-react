@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from "react";
 
 // useEffect runs asynchronously and after a render is painted to the screen.
 /**
@@ -17,7 +17,11 @@ const BlinkyRender1 = () => {
   }, [value]);
 
   return (
-    <div onKeyDown={() => setValue(0)} onClick={() => setValue(0)} className="h-52">
+    <div
+      onKeyDown={() => setValue(0)}
+      onClick={() => setValue(0)}
+      className="h-52"
+    >
       <span>useLayoutEffect</span>
       value: {value}
     </div>
@@ -41,7 +45,11 @@ const BlinkyRender2 = () => {
   }, [value]);
 
   return (
-    <div onKeyDown={() => setValue(0)} onClick={() => setValue(0)} className="demo">
+    <div
+      onKeyDown={() => setValue(0)}
+      onClick={() => setValue(0)}
+      className="demo"
+    >
       <span>useEffect</span>
       value: {value}
     </div>

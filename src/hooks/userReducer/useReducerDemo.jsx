@@ -1,13 +1,13 @@
-import React, { useReducer } from 'react';
-import { Button } from 'antd';
+import { Button } from "antd";
+import { useReducer } from "react";
 
 const UseReducerDemo = () => {
   const [count, dispatch] = useReducer((state, action) => {
     switch (action.type) {
-      case 'add': {
+      case "add": {
         return state + 1;
       }
-      case 'sub': {
+      case "sub": {
         return state - 1;
       }
       default:
@@ -20,14 +20,14 @@ const UseReducerDemo = () => {
       <h2>current value: {count}</h2>
       <Button
         onClick={() => {
-          dispatch({ type: 'add' });
+          dispatch({ type: "add" });
         }}
       >
         add
       </Button>
       <Button
         onClick={() => {
-          dispatch({ type: 'sub' });
+          dispatch({ type: "sub" });
         }}
       >
         sub
