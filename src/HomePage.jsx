@@ -1,36 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
-import Clock from "./clock/clock";
-import FunctionalClock from "./clock/functionalClock";
-import Example from "./composition/composition";
-import ContextDemo from "./context/contextDemo";
-import { FlavorFormFunction, NameForm, NameFormFunction } from "./form/form";
-import Game from "./game/game";
-import CustomHooks from "./hooks/customHooks/customHooks";
-import UseCallbackDemo from "./hooks/useCallback/useCallback";
-import UseContextDemo from "./hooks/useContext/useContextDemo";
-import useEffectDemo from "./hooks/useEffect/useEffectDemo.tsx";
-import UseLayoutEffectDemo from "./hooks/useLayoutEffect/useLayoutEffectDemo";
-import useMemoDemo from "./hooks/useMemo/useMemo";
-import useRefDemo from "./hooks/useRef/useRef";
-import useStateDemo from "./hooks/useState/useState.jsx";
-import ReducerDemo from "./hooks/userReducer/useReducer";
-import UseReducerDemo from "./hooks/userReducer/useReducerDemo";
-import { NumberListClass, NumberListFunction } from "./key/key.tsx";
-import Calculator from "./liftingStateUp/Calculator";
-import BookablesList from "./reactInAction/bookablesList.tsx";
-import Bookings from "./reactInAction/bookings.tsx";
-import InAction from "./reactInAction/inAction.tsx";
-import Users from "./reactInAction/users.tsx";
-import Road2React from "./road2react/road2react";
-import MyApp from "./welcome/welcome";
-
 const { Header, Sider, Content } = Layout;
-const { Item, SubMenu } = Menu;
 
 function SideMenu() {
   const navigate = useNavigate();
@@ -53,7 +27,6 @@ function SideMenu() {
   }, [location]);
 
   function menuClick({ key, keyPath }) {
-    console.log("key: ", key, keyPath);
     setSelectedMenu([key]);
     setSelectedSubMenu(keyPath);
     navigate(`/${keyPath.reverse().join("/")}`);
