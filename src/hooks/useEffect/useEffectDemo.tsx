@@ -1,12 +1,12 @@
 import { Button } from "antd";
-import React, { useEffect, useState } from "react";
-import { Link, Route, Routes } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, Outlet } from "react-router";
 
 /**
  * 每次render或者re-render都会执行useEffect
  */
 
-function Index() {
+export function Index() {
   useEffect(() => {
     console.log("index come");
     return () => {
@@ -17,7 +17,7 @@ function Index() {
   return <h2>index</h2>;
 }
 
-function List() {
+export function List() {
   useEffect(() => {
     console.log("add mousemove event");
     const onMouseMove = (e: MouseEvent) => {
@@ -25,7 +25,7 @@ function List() {
     };
     window.addEventListener("mousemove", onMouseMove);
     return () => {
-      console.log("mousemove event revmoved");
+      console.log("mousemove event removed");
       window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
@@ -72,16 +72,15 @@ const UseEffectDemo = () => {
       </Button>
       <ul>
         <li>
-          <Link to="">index</Link>
+          <Link to="index">index</Link>
         </li>
         <li>
           <Link to="list">list</Link>
         </li>
       </ul>
-      <Routes>
-        <Route path="" element={<Index />} />
-        <Route path="list" element={<List />} />
-      </Routes>
+      <div className="border border-gray-300 p-4 mt-4">
+        <Outlet />
+      </div>
     </div>
   );
 };

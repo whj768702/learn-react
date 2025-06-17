@@ -9,7 +9,7 @@ import Game from "./game/game";
 import CustomHooks from "./hooks/customHooks/customHooks";
 import UseCallbackDemo from "./hooks/useCallback/useCallback";
 import UseContextDemo from "./hooks/useContext/useContextDemo";
-import UseEffectDemo from "./hooks/useEffect/useEffectDemo";
+import UseEffectDemo, { Index, List } from "./hooks/useEffect/useEffectDemo";
 import UseLayoutEffectDemo from "./hooks/useLayoutEffect/useLayoutEffectDemo";
 import UseMemoDemo from "./hooks/useMemo/useMemo";
 import UseRefDemo from "./hooks/useRef/useRef";
@@ -76,6 +76,17 @@ const router = createBrowserRouter([
           {
             path: "useEffect",
             element: <UseEffectDemo />,
+            children: [
+              {
+                path: "index",
+                index: true,
+                element: <Index />,
+              },
+              {
+                path: "list",
+                element: <List />,
+              },
+            ],
           },
           {
             path: "useContext",
